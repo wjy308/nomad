@@ -15,6 +15,7 @@ export default function Home() {
     // TODO: ~~한 이유로 console.log를 남김!
     // eslint-disable-next-line no-console
     console.log('state', state);
+    console.log('dddd);
   }, [state]);
 
   return (
