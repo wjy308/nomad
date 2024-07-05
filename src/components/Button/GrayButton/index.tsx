@@ -7,20 +7,16 @@ interface Props {
   height?: string;
 }
 
-const GrayButton = ({ text, onClick, width = 'w-full', height = 'h-auto' }: Props) => {
+function GrayButton({ text, onClick, width = 'w-full', height = 'h-auto' }: Props) {
   const handleClick = () => {
     onClick();
   };
 
   return (
-    <button
-      type='button'
-      onClick={handleClick}
-      className={`flex justify-center items-center px-5 py-3 font-bold rounded-md bg-[#a4a1aa] text-white ${width} ${height}`}
-    >
+    <button type='button' onClick={handleClick} className={`flex justify-center items-center px-5 py-3 font-bold rounded-md bg-[#a4a1aa] text-white ${width} ${height}`}>
       {text}
     </button>
   );
-};
+}
 
 export default GrayButton;

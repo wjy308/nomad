@@ -8,7 +8,7 @@ interface Props {
   height?: string;
 }
 
-const CustomButton = ({ text, color, onClick, width = 'w-full', height = 'h-full' }: Props) => {
+function CustomButton({ text, color, onClick, width = 'w-full', height = 'h-full' }: Props) {
   const backgroundColor = color === 'black' ? 'bg-[#112211]' : 'bg-[#ffffff]';
   const borderColor = color === 'white' ? 'border-[#000000]' : 'border-[#112211]';
   const textColor = color === 'black' ? 'text-[#ffffff]' : 'text-[#112211]';
@@ -22,6 +22,6 @@ const CustomButton = ({ text, color, onClick, width = 'w-full', height = 'h-full
       {text}
     </button>
   );
-};
+}
 
 export default CustomButton;
