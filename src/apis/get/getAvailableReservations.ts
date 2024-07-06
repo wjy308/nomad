@@ -97,22 +97,15 @@ export const getReservedScheduleDate = async (activityId: number, date: string):
  *     console.error('Error fetching reservations:', error);
  *   });
  */
-export const getMyActivitiesReservation = async (
-  activityId: number,
-  scheduleId: number,
-  status: 'declined' | 'confirmed' | 'pending',
-  { pageParam, size = 10 }: { pageParam: number | undefined; size?: number },
-): Promise<any> => {
+export const getMyActivitiesReservation = async (activityId: number, scheduleId: number, status: 'declined' | 'confirmed' | 'pending', size = 10, { pageParam }: { pageParam: number | undefined }) => {
   try {
     const res = await instance.get(`/my-activities/${activityId}/reservations`, {
-      params: { size, scheduleId, status, cursorId: pageParam || null },
+      params: { size, scheduleId, status, cursorId: pageParam ? pageParam : null },
     });
+
     return res.data;
   } catch (e) {
-    if (e instanceof Error) {
-      return e.message;
-    }
-    return 'An unknown error occurred';
+    console.log(e);
   }
 };
 

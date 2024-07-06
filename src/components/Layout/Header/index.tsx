@@ -2,7 +2,7 @@ import instance from '@/apis/axios';
 import { ICON, IMAGE } from '@/constant/importImages';
 import useToggleButton from '@/hooks/useToggleButton';
 import useOutsideClick from '@/hooks/useOutsideClick';
-import { MyInfoProps } from '@/utils/types'; 
+import { MyInfoProps } from '@/utils/types';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
