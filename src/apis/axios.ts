@@ -1,17 +1,18 @@
 import axios from 'axios';
 
-export const instance = axios.create({
+const instance = axios.create({
   baseURL: 'https://sp-globalnomad-api.vercel.app/2-5',
 });
 
 instance.interceptors.request.use((config) => {
-  if (config.headers.Authorization) return config;
+  const newConfig = { ...config };
+  if (newConfig.headers.Authorization) return newConfig;
 
   const accessToken = localStorage.getItem('accessToken');
   if (accessToken) {
-    config.headers['Authorization'] = `Bearer ${accessToken}`;
+    newConfig.headers.Authorization = `Bearer ${accessToken}`;
   }
-  return config;
+  return newConfig;
 });
 
 instance.interceptors.response.use(
@@ -19,22 +20,24 @@ instance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     const refreshToken = localStorage.getItem('refreshToken');
-    if (error.response?.status === 401 && !originalRequest._retry && refreshToken) {
+    if (error.response?.status === 401 && !originalRequest.retryAttempt && refreshToken) {
       const res = await instance.post(
         '/auth/tokens',
         {},
         {
-          headers: { Authorization: `Bearer ${refreshToken}`, _retry: true },
-        }
+          headers: { Authorization: `Bearer ${refreshToken}` },
+        },
       );
-      const accessToken = res.data.accessToken;
+      const { accessToken } = res.data;
       const nextRefreshToken = res.data.refreshToken;
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', nextRefreshToken);
-      originalRequest._retry = true;
+      originalRequest.retryAttempt = true;
 
       return instance(originalRequest);
     }
     return Promise.reject(error);
-  }
+  },
 );
+
+export default instance;

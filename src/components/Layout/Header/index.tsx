@@ -1,17 +1,24 @@
-import { instance } from '@/apis/axios';
+import instance from '@/apis/axios';
 import { ICON, IMAGE } from '@/constant/importImages';
-import { useOutsideClick, useToggleButton } from '@/hooks';
-import { myInfoProps } from '@/utils/props-type';
+import useToggleButton from '@/hooks/useToggleButton';
+import useOutsideClick from '@/hooks/useOutsideClick';
+import { MyInfoProps } from '@/utils/props-type';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
-import Avatar from '../../Avatar';
 import DropdownMenu from '@/components/DropdownMenu';
+import Avatar from '../../Avatar';
 // import Modal from '../Modals';
 
-export default function Header() {
+/**
+ * Header 컴포넌트는 네비게이션 바를 렌더링합니다.
+ * 사용자 인증 상태에 따라 로그인/회원가입 링크 또는 사용자 정보와 드롭다운 메뉴를 표시합니다.
+ *
+ * @returns {JSX.Element | null} 네비게이션 바 컴포넌트
+ */
+export default function Header(): JSX.Element | null {
   const router = useRouter();
   const [Auth, setAuth] = useState(false);
   const { isToggle: isDropdownOpen, handleToggleClick: isDropdownOpenToggle } = useToggleButton();
@@ -20,8 +27,12 @@ export default function Header() {
 
   useOutsideClick(ref, isDropdownOpen, isDropdownOpenToggle);
 
+  /**
+   * 현재 사용자의 정보를 가져오는 함수입니다.
+   * @returns {Promise<MyInfoProps>} 사용자 정보 데이터
+   */
   const getMyInfo = async () => {
-    const { data } = await instance.get<myInfoProps>('/users/me');
+    const { data } = await instance.get<MyInfoProps>('/users/me');
     return data;
   };
 
@@ -31,6 +42,9 @@ export default function Header() {
     retry: 1,
   });
 
+  /**
+   * 로그아웃 핸들러 함수입니다. 사용자의 토큰을 삭제하고 로그인 페이지로 리디렉션합니다.
+   */
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
@@ -40,6 +54,9 @@ export default function Header() {
     }
   };
 
+  /**
+   * 마이페이지 클릭 핸들러 함수입니다. 드롭다운 메뉴를 닫고 마이페이지로 리디렉션합니다.
+   */
   const handleMyPageClick = () => {
     isDropdownOpenToggle();
     router.push('/mypage');
@@ -86,7 +103,7 @@ export default function Header() {
             </div>
           ) : (
             <div className='relative flex items-center gap-10'>
-              <button className='flex items-center' onClick={isNotificationOpenToggle}>
+              <button type='button' className='flex items-center' onClick={isNotificationOpenToggle}>
                 <Image src={ICON.notification.default.src} alt={ICON.notification.default.alt} />
               </button>
               {/* {isNotificationOpen && (
@@ -96,11 +113,12 @@ export default function Header() {
                   setShowModal={isNotificationOpenToggle}
                 />
               )} */}
+              {isNotificationOpen && <div />}
               <div className='relative flex items-center gap-10'>
                 <div className='h-9 border-r border-gray-300' />
                 <div className='flex items-center gap-4'>
                   <Avatar profileImageUrl={MyInfoData?.profileImageUrl} type='gnb' />
-                  <button className='flex items-center text-lg font-medium text-black' onClick={isDropdownOpenToggle} ref={ref}>
+                  <button type='button' className='flex items-center text-lg font-medium text-black' onClick={isDropdownOpenToggle} ref={ref}>
                     {MyInfoData?.nickname}
                   </button>
                   {isDropdownOpen && <DropdownMenu type='gnb' dropdownMenuList={MyMenuList} />}
