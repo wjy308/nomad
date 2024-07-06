@@ -24,7 +24,7 @@ instance.interceptors.request.use((config) => {
  *
  * @example
  * import instance from '@/apis/axios';
- * 
+ *
  * // Making a GET request
  * instance.get('/endpoint')
  *   .then(response => {

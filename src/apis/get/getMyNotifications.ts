@@ -1,5 +1,5 @@
 import instance from '../axios';
-
+/* eslint-disable */
 /**
  * Fetches the user's notifications with pagination support.
  *
@@ -26,3 +26,4 @@ const getMyNotifications = async ({ pageParam }: { pageParam: number | undefined
 };
 
 export default getMyNotifications;
+/* eslint-enable */

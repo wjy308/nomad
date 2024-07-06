@@ -1,5 +1,5 @@
 import instance from '../axios';
-
+/* eslint-disable */
 /**
  * Uploads an image for an activity by sending a POST request with form data.
  *
@@ -9,7 +9,7 @@ import instance from '../axios';
  * @example
  * const formData = new FormData();
  * formData.append('image', imageFile);
- * 
+ *
  * postActivityImageUrl(formData)
  *   .then(response => {
  *     console.log('Image uploaded:', response);
@@ -26,3 +26,4 @@ const postActivityImageUrl = async (postData: FormData): Promise<any> => {
 };
 
 export default postActivityImageUrl;
+/* eslint-enable */

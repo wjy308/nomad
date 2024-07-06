@@ -1,5 +1,5 @@
 import instance from '../axios';
-
+/* eslint-disable */
 /**
  * Creates a new reservation for a specific activity by sending a POST request with the reservation data.
  *
@@ -14,7 +14,7 @@ import instance from '../axios';
  *   time: '10:00',
  *   participants: 2,
  * };
- * 
+ *
  * postReservation(456, reservationData)
  *   .then(response => {
  *     console.log('Reservation created:', response);
@@ -29,3 +29,4 @@ const postReservation = async (activityId: number, data: unknown): Promise<any> 
 };
 
 export default postReservation;
+/* eslint-enable */

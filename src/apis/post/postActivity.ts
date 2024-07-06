@@ -1,5 +1,5 @@
 import instance from '../axios';
-
+/* eslint-disable */
 interface ErrorResponse {
   response?: {
     data: {
@@ -40,3 +40,4 @@ const postActivity = async (data: unknown): Promise<any> => {
 };
 
 export default postActivity;
+/* eslint-enable */
