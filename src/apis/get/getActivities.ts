@@ -112,15 +112,7 @@ export const getActivities = async ({
  *     console.error('Error searching activities:', error);
  *   });
  */
-export const getSearchActivities = async ({
-  currentPage,
-  currentSize,
-  keyword,
-}: {
-  currentPage: number;
-  currentSize: number;
-  keyword: string;
-}): Promise<GetActivitiesType> => {
+export const getSearchActivities = async ({ currentPage, currentSize, keyword }: { currentPage: number; currentSize: number; keyword: string }): Promise<GetActivitiesType> => {
   const params: {
     method: string;
     page: number;

@@ -54,4 +54,3 @@ export function postformatDate(dateString: Date | string): string | undefined {
   }
   
   /* eslint-enable */
-  

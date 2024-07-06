@@ -1,5 +1,5 @@
 import instance from '../axios';
-
+/* eslint-disable */
 /**
  * Fetches the details of a specific activity by its ID.
  *
@@ -24,3 +24,4 @@ const getActivity = async (activityId: string): Promise<any> => {
 };
 
 export default getActivity;
+/* eslint-enable */

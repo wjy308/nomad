@@ -93,4 +93,3 @@ export const queryKey = {
 	getActivityReview: (id: number, page: number) => ['activity', 'review', id, page],
   };
   /* eslint-enable */
-  

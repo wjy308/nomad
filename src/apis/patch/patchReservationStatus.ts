@@ -1,5 +1,5 @@
 import instance from '../axios';
-
+/* eslint-disable */
 /**
  * Updates the status of a reservation for a specific activity using a PATCH request.
  *
@@ -23,3 +23,4 @@ const patchReservationStatus = async (activityId: number, reservationId: number,
 };
 
 export default patchReservationStatus;
+/* eslint-enable */

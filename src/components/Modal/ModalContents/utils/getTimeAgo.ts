@@ -29,32 +29,31 @@
  * getTimeAgo("2023-07-05T12:00:00Z");
  */
 export default function getTimeAgo(timestamp: string): string {
-	const current = new Date();
-	const previous = new Date(timestamp);
-	const diff = Math.abs(current.getTime() - previous.getTime()) / 1000;
-  
-	const seconds = Math.floor(diff);
-	const minutes = Math.floor(diff / 60);
-	const hours = Math.floor(diff / 3600);
-	const days = Math.floor(diff / 86400);
-	const months = Math.floor(diff / 2629800);
-	const years = Math.floor(diff / 31557600);
-  
-	if (seconds < 60) {
-	  return '방금 전';
-	}
-	if (minutes < 60) {
-	  return `${minutes}분 전`;
-	}
-	if (hours < 24) {
-	  return `${hours}시간 전`;
-	}
-	if (days < 30) {
-	  return `${days}일 전`;
-	}
-	if (months < 12) {
-	  return `${months}달 전`;
-	}
-	return `${years}년 전`;
+  const current = new Date();
+  const previous = new Date(timestamp);
+  const diff = Math.abs(current.getTime() - previous.getTime()) / 1000;
+
+  const seconds = Math.floor(diff);
+  const minutes = Math.floor(diff / 60);
+  const hours = Math.floor(diff / 3600);
+  const days = Math.floor(diff / 86400);
+  const months = Math.floor(diff / 2629800);
+  const years = Math.floor(diff / 31557600);
+
+  if (seconds < 60) {
+    return '방금 전';
   }
-  
+  if (minutes < 60) {
+    return `${minutes}분 전`;
+  }
+  if (hours < 24) {
+    return `${hours}시간 전`;
+  }
+  if (days < 30) {
+    return `${days}일 전`;
+  }
+  if (months < 12) {
+    return `${months}달 전`;
+  }
+  return `${years}년 전`;
+}

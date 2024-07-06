@@ -1,5 +1,5 @@
 import instance from '@/apis/axios';
-
+/* eslint-disable */
 /**
  * Fetches the list of available schedules for a given activity, year, and month.
  *
@@ -135,3 +135,4 @@ export const getMyReserVations = async (size: number): Promise<any> => {
   const res = await instance.get(`/my-reservations`, { params: { size } });
   return res.data;
 };
+/* eslint-enable */

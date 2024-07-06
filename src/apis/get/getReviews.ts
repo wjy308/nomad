@@ -1,5 +1,5 @@
 import instance from '../axios';
-
+/* eslint-disable */
 /**
  * Fetches reviews for a specific activity with pagination support.
  *
@@ -24,3 +24,4 @@ const getReviews = async (activityId: number, page = 1, size = 3): Promise<any> 
 };
 
 export default getReviews;
+/* eslint-enable */

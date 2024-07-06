@@ -1,5 +1,5 @@
 import instance from '../axios';
-
+/* eslint-disable */
 /**
  * Updates an activity with the given data using a PATCH request.
  *
@@ -27,3 +27,4 @@ const patchActivity = async (activityId: string | string[] | undefined, data: un
 };
 
 export default patchActivity;
+/* eslint-enable */
