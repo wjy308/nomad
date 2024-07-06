@@ -1,9 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import RatingInput from './RatingInput';
 import { postMyReview } from '@/apis/post/postReview';
-
-// 작성하기 버튼 필요!!!
+import RatingInput from './RatingInput';
 
 /**
  * FormData interface
@@ -27,14 +25,14 @@ interface Props {
 
 /**
  * ReviewForm Component
- * 
+ *
  * This component renders a form for submitting a review. It includes a rating input and a textarea
  * for the review content. Upon submission, the review data is posted using a mutation function.
- * 
+ *
  * @param {Props} props - The properties for the component.
  * @param {number} props.id - The ID of the reservation being reviewed.
  * @param {() => void} props.onClickCloseModal - Function to close the modal.
- * 
+ *
  * @returns {JSX.Element} The rendered ReviewForm component.
  */
 export default function ReviewForm({ id, onClickCloseModal }: Props) {
@@ -56,14 +54,16 @@ export default function ReviewForm({ id, onClickCloseModal }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-6 mt-7">
+    <form onSubmit={handleSubmit(submit)} className='flex flex-col gap-6 mt-7'>
       <RatingInput control={control} setValue={setValue} />
       <textarea
         {...register('content', { required: '후기를 작성해 주세요' })}
-        className="text-[1.6rem] border border-gray-400 w-full min-h-[22.4rem] resize-none p-2 px-4 rounded-md"
+        className='text-[1.6rem] border border-gray-400 w-full min-h-[22.4rem] resize-none p-2 px-4 rounded-md'
         placeholder='후기를 작성해주세요'
-      ></textarea>
-      <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">작성하기</button>
+      />
+      <button type='submit' className='bg-blue-500 text-white py-2 px-4 rounded-md'>
+        작성하기
+      </button>
     </form>
   );
 }

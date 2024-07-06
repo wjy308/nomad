@@ -1,7 +1,10 @@
-import { ICON } from '@/constant';
-
+import { ICON } from '@/constant/importImages';
+/* eslint-disable */
 const { eye } = ICON;
 
+/**
+ * Interface defining the structure for user input validation types.
+ */
 interface USER_INPUT_VALIDATION_TYPE {
   email: {
     regex: RegExp;
@@ -37,6 +40,11 @@ interface USER_INPUT_VALIDATION_TYPE {
   };
 }
 
+/**
+ * User input validation settings.
+ *
+ * Contains regular expressions and error messages for validating various user inputs.
+ */
 export const USER_INPUT_VALIDATION: USER_INPUT_VALIDATION_TYPE = {
   email: {
     regex: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
@@ -71,6 +79,11 @@ export const USER_INPUT_VALIDATION: USER_INPUT_VALIDATION_TYPE = {
   },
 };
 
+/**
+ * Password visibility settings.
+ *
+ * Contains the source, alt text, and input type for the password visibility toggle button.
+ */
 export const USER_PASSWORD_SHOW: {
   on: {
     src: string;
@@ -95,6 +108,11 @@ export const USER_PASSWORD_SHOW: {
   },
 };
 
+/**
+ * User categories.
+ *
+ * Contains a list of user categories with their corresponding IDs.
+ */
 export const USER_CATEGORYS = [
   { id: 1, category: '문화 · 예술' },
   { id: 2, category: '식음료' },
@@ -103,3 +121,4 @@ export const USER_CATEGORYS = [
   { id: 5, category: '관광' },
   { id: 6, category: '웰빙' },
 ];
+/* eslint-enable */

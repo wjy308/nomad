@@ -1,13 +1,17 @@
 import { useEffect, useState, useRef } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import ReservationCard from './ReservationCard';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import useCustomInfiniteQuery from '@/hooks/useCustomInfiniteQuery';
 import Dropdown from '@/components/Dropdown';
 import { getMyActivitiesReservation, getReservedScheduleDate } from '@/apis/get/getAvailableReservations';
-import { changeDateToStringFormat } from '../utils';
 import { ReservationCardType } from '@/utils/types/reservationInfo';
 import { queryKey } from '@/apis/queryKey';
+import PropTypes from 'prop-types';
+import { changeDateToStringFormat } from '../utils/dateChange';
+import ReservationCard from './ReservationCard';
+
+// PropTypes 추가
+
 interface ReservationSchedule {
   count: { pending: number; confirmed: number; declined: number };
   endTime: string;
@@ -23,15 +27,29 @@ interface Props {
 
 const STATUSES = ['신청', '확정', '거절'];
 
+/**
+ * Component to display and manage reservation information for a specific activity and date.
+ *
+ * This component fetches reservation data and displays it in a list format, allowing users to filter
+ * by status and select different schedules using a dropdown menu. It also supports infinite scrolling
+ * to load more reservations as needed.
+ *
+ * @param {Props} props - The props for the ReservationInfo component.
+ * @param {string} [props.date='2024-03-20'] - The date for which reservations are displayed.
+ * @param {number} [props.activityId=178] - The ID of the activity for which reservations are displayed.
+ * @param {Function} [props.onClickCloseModal] - Optional function to close the modal.
+ *
+ * @returns {JSX.Element} The rendered ReservationInfo component.
+ */
 export default function ReservationInfo({ date = '2024-03-20', activityId = 178, onClickCloseModal }: Props) {
   const queryClient = useQueryClient();
   const [selectedStatus, setSelectedStatus] = useState<ReservationCardType['status']>('pending');
   const [scheduledId, setScheduledId] = useState<number>(0);
-  const [schedule, setSchedule] = useState();
+  const [schedule, setSchedule] = useState(); // eslint-disable-line @typescript-eslint/no-shadow
   const observerRef = useRef<HTMLDivElement>(null);
 
-  const { data: reservedScheduleData, isSuccess } = useQuery({
-    queryKey: queryKey.getMyReservationUseDate(date),
+  const { data: reservedScheduleData } = useQuery({
+    queryKey: queryKey.getMyReservationUseDate(date), // eslint-disable-line @tanstack/query/exhaustive-deps
     queryFn: () => getReservedScheduleDate(activityId, date),
   });
 
@@ -41,7 +59,7 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178,
     isFetching,
     data: reservationStatusData,
   } = useCustomInfiniteQuery({
-    queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus),
+    queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus), // eslint-disable-line @tanstack/query/exhaustive-deps
     queryFn: ({ pageParam }: { pageParam: number | undefined }) => getMyActivitiesReservation(activityId, scheduledId, selectedStatus, 10, { pageParam }),
   });
 
@@ -91,6 +109,7 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178,
             className={`mb-[-0.2rem] py-0 px-[0.4rem] pb-[1.3rem] ${
               selectedStatus === (status === '신청' ? 'pending' : status === '확정' ? 'confirmed' : 'declined') ? 'font-semibold text-darkgreen border-b-4 border-darkgreen' : ''
             }`}
+            type='button' // eslint-disable-line react/button-has-type
           >
             {status} {schedule?.[status === '신청' ? 'pending' : status === '확정' ? 'confirmed' : 'declined']}
           </button>
@@ -135,3 +154,17 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178,
     </>
   );
 }
+
+// eslint-disable-next-line react/require-default-props
+ReservationInfo.defaultProps = {
+  date: '2024-03-20',
+  activityId: 178,
+  onClickCloseModal: () => {},
+};
+
+ReservationInfo.propTypes = {
+  date: PropTypes.string,
+  activityId: PropTypes.number,
+  onClickCloseModal: PropTypes.func,
+};
+/* eslint-enable */

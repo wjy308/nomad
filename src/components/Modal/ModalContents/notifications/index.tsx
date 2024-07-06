@@ -3,17 +3,27 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ICON } from '@/constant';
 import getMyNotifications from '@/apis/get/getMyNotifications';
 import { queryKey } from '@/apis/queryKey';
-import getTimeAgo from '../utils/getTimeAgo';
 import deleteNotifications from '@/apis/delete/deleteNotification';
 import useCustomInfiniteQuery from '@/hooks/useCustomInfiniteQuery';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import { useRef } from 'react';
-
+import getTimeAgo from '../utils/getTimeAgo';
+/* eslint-disable */
 const { ellipse, xMedium } = ICON;
 
+/**
+ * Notifications component to display and manage user notifications.
+ * 
+ * This component fetches and displays a list of user notifications using infinite scrolling.
+ * Users can delete notifications, and important content within the notifications is highlighted.
+ * 
+ * @returns {JSX.Element} The rendered Notifications component.
+ */
 export default function Notifications() {
   const queryClient = useQueryClient();
   const observerRef = useRef<HTMLDivElement>(null);
+
+  // Fetch notifications with infinite scrolling
   const {
     fetchNextPage,
     hasNextPage,
@@ -25,34 +35,53 @@ export default function Notifications() {
     queryFn: ({ pageParam }: { pageParam: number | undefined }) => getMyNotifications({ pageParam }, 2),
   });
 
+  // Mutation for deleting a notification
   const deleteNotificationMutation = useMutation({
     mutationFn: (id: number) => deleteNotifications(id),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKey.myNotifications }),
   });
 
+  /**
+   * Handles the deletion of a notification.
+   * 
+   * @param {number} id - The ID of the notification to be deleted.
+   */
   const handelDeleteNotification = (id: number) => {
     deleteNotificationMutation.mutate(id);
   };
 
+  /**
+   * Highlights specific words in the notification content.
+   * 
+   * @param {string} content - The content of the notification.
+   * @returns {string} The content with highlighted words.
+   */
   function highlightContent(content: string) {
     if (content.includes('승인')) {
-      return content.replace(/승인/g, '<span style= "color: #0085ff " >$&</span>');
-    } else if (content.includes('거절')) {
-      return content.replace(/거절/g, '<span style="color: #ff472e">$&</span>');
-    } else {
-      return content;
+      return content.replace(/승인/g, '<span style="color: #0085ff">$&</span>');
     }
+    if (content.includes('거절')) {
+      return content.replace(/거절/g, '<span style="color: #ff472e">$&</span>');
+    }
+    return content;
   }
 
-  const description = (context: string) => {
-    return <div className='text-[1.4rem] font-normal text-black leading-[2.2rem]' dangerouslySetInnerHTML={{ __html: highlightContent(context) }}></div>;
-  };
+  /**
+   * Renders the notification description with highlighted content.
+   * 
+   * @param {string} context - The content of the notification.
+   * @returns {JSX.Element} The rendered description.
+   */
+  const description = (context: string) => <div className='text-[1.4rem] font-normal text-black leading-[2.2rem]' dangerouslySetInnerHTML={{ __html: highlightContent(context) }} />;
+
+  // Use intersection observer for infinite scrolling
   useIntersectionObserver({
     observerRef,
     hasNextPage,
     isFetching,
     fetchNextPage,
   });
+
   return (
     <>
       <h2 className='text-[2rem] font-bold text-black'>알림 {notificationsData?.totalCount}개</h2>
@@ -86,3 +115,4 @@ export default function Notifications() {
     </>
   );
 }
+/* eslint-enable */

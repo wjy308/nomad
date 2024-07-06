@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://sp-globalnomad-api.vercel.app/2-5',
+  baseURL: 'https://sp-globalnomad-api.vercel.app/5-7',
 });
 
 instance.interceptors.request.use((config) => {
@@ -15,6 +15,36 @@ instance.interceptors.request.use((config) => {
   return newConfig;
 });
 
+/**
+ * Axios instance with interceptors for request and response.
+ *
+ * The instance is pre-configured with a base URL and interceptors that handle:
+ * - Adding an Authorization header with a Bearer token from localStorage to outgoing requests.
+ * - Refreshing the access token if a 401 Unauthorized error is encountered, and retrying the original request.
+ *
+ * @example
+ * import instance from '@/apis/axios';
+ * 
+ * // Making a GET request
+ * instance.get('/endpoint')
+ *   .then(response => {
+ *     console.log(response.data);
+ *   })
+ *   .catch(error => {
+ *     console.error('Error:', error);
+ *   });
+ *
+ * // Making a POST request
+ * instance.post('/endpoint', { key: 'value' })
+ *   .then(response => {
+ *     console.log(response.data);
+ *   })
+ *   .catch(error => {
+ *     console.error('Error:', error);
+ *   });
+ *
+ * @returns {AxiosInstance} Configured Axios instance with interceptors.
+ */
 instance.interceptors.response.use(
   (res) => res,
   async (error) => {

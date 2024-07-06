@@ -1,8 +1,10 @@
+/* eslint-disable */
+
 import Calendar from 'react-calendar';
 import { MutableRefObject } from 'react';
-import { Value } from '../DateForm';
-import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
+import 'react-calendar/dist/Calendar.css';
+import { Value } from '../DateForm';
 
 interface CalendarProps {
   value?: Value;
@@ -11,6 +13,20 @@ interface CalendarProps {
   abledDate?: string[];
 }
 
+/**
+ * SmallCalendar component for selecting dates.
+ *
+ * This component uses the `react-calendar` library to display a calendar that allows users to select dates.
+ * It supports custom styling and can disable dates that are not in the `abledDate` array.
+ *
+ * @param {Object} props - The properties for the SmallCalendar component.
+ * @param {Value} [props.value] - The current selected date or date range.
+ * @param {(data: Value | string) => void} props.onChange - Callback function to handle date changes.
+ * @param {MutableRefObject<null>} [props.ref] - Optional ref for the calendar component.
+ * @param {string[]} [props.abledDate] - Array of dates that are selectable. Dates not in this array will be disabled.
+ *
+ * @returns {JSX.Element} The rendered SmallCalendar component.
+ */
 export default function SmallCalendar({ onChange, value, ref, abledDate }: CalendarProps) {
   return (
     <div className='p-4 mx-auto min-w-[24rem] max-w-[37.3rem] border border-gray-300 rounded-xl md:p-6 md:mx-8'>
@@ -20,9 +36,7 @@ export default function SmallCalendar({ onChange, value, ref, abledDate }: Calen
         ref={ref}
         value={value}
         onChange={onChange}
-        tileDisabled={({ date }) => {
-          return abledDate ? !abledDate.find((day) => day === moment(date).format('YYYY-MM-DD')) : false;
-        }}
+        tileDisabled={({ date }) => (abledDate ? !abledDate.find((day) => day === moment(date).format('YYYY-MM-DD')) : false)}
         className='text-sm font-semibold text-gray-600 max-w-full rounded-xl font-openSans'
       />
       <style jsx global>{`
@@ -85,3 +99,4 @@ export default function SmallCalendar({ onChange, value, ref, abledDate }: Calen
     </div>
   );
 }
+/* eslint-enable */

@@ -15,4 +15,3 @@ export interface ReservationCardType {
   updatedAt: string | Date;
   userId: number;
 }
-
