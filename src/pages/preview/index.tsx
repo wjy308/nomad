@@ -4,6 +4,7 @@ import GrayButton from '@/components/Button/GrayButton';
 import useModal from '@/hooks/useModal';
 import Card from '@/components/Card';
 import MyActibitiyCardInfo from '@/components/Card/myActibityCardInfo';
+import AcitivitiesCardList from '@/components/CardList/AcitivitiesCardList';
 import Pagination from '@/components/Pagination';
 
 export const getStaticProps = async () => ({
@@ -56,11 +57,12 @@ function Index() {
       <CustomButton text='confirm 모달 열기' color='white' onClick={handleOpenConfirmModal} />
 
       <Card image='/images/test123.png'>
-        <MyActibitiyCardInfo title='테스트' price={10000} rating={4.31} reviewCount={2039} />
+        <MyActibitiyCardInfo data={{ title: '테스트', price: 10000, rating: 4.31, reviewCount: 2039 }} />
       </Card>
       <hr />
       <Pagination currentPage={currentPage} totalPages={12} onPageChange={handlePageChange} />
       <hr />
+      <AcitivitiesCardList activities={[]} />
     </>
   );
 }
