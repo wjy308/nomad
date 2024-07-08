@@ -3,6 +3,7 @@ import CustomButton from '@/components/Button/CustomButton';
 import GrayButton from '@/components/Button/GrayButton';
 import Card from '@/components/Card';
 import MyActibitiyCardInfo from '@/components/Card/myActibityCardInfo';
+import AcitivitiesCardList from '@/components/CardList/AcitivitiesCardList';
 
 const index = () => (
   <>
@@ -13,8 +14,10 @@ const index = () => (
     <GrayButton text='신청 불가' onClick={() => alert('신청 불가')} />
     <hr />
     <Card image='/images/test123.png'>
-      <MyActibitiyCardInfo title='테스트' price={10000} rating={4.31} reviewCount={2039} />
+      <MyActibitiyCardInfo data={{ title: '테스트', price: 10000, rating: 4.31, reviewCount: 2039 }} />
     </Card>
+    <hr />
+    <AcitivitiesCardList activities={[]} />
   </>
 );
 
