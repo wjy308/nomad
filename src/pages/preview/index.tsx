@@ -13,6 +13,21 @@ export const getStaticProps = async () => ({
   },
 });
 
+const cardData = {
+  id: 0,
+  userId: 0,
+  title: 'string',
+  description: 'string',
+  category: 'string',
+  price: 11110,
+  address: 'string',
+  bannerImageUrl: 'string',
+  rating: 20,
+  reviewCount: 1110,
+  createdAt: 'string',
+  updatedAt: 'string',
+};
+
 function Index() {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -57,7 +72,7 @@ function Index() {
       <CustomButton text='confirm 모달 열기' color='white' onClick={handleOpenConfirmModal} />
 
       <Card image='/images/test123.png'>
-        <MyActibitiyCardInfo data={{ title: '테스트', price: 10000, rating: 4.31, reviewCount: 2039 }} />
+        <MyActibitiyCardInfo data={cardData} />
       </Card>
       <hr />
       <Pagination currentPage={currentPage} totalPages={12} onPageChange={handlePageChange} />

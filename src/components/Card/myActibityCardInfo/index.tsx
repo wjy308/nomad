@@ -1,22 +1,8 @@
+import { Activity } from '@/utils/types/myActivities';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-interface ActibityCardData {
-  id?: number;
-  userId?: number;
-  title: string;
-  description?: string;
-  category?: string;
-  price: number;
-  address?: string;
-  bannerImageUrl?: string;
-  rating: number;
-  reviewCount: number;
-  createdAt?: string;
-  updatedAt?: string;
-}
-
-export default function MyActibitiyCardInfo({ data }: { data: ActibityCardData }) {
+export default function MyActibitiyCardInfo({ data }: { data: Activity }) {
   const [isDropShow, setIsDropShow] = useState<boolean>(false);
 
   const { title, price, rating, reviewCount } = data;
@@ -52,7 +38,7 @@ export default function MyActibitiyCardInfo({ data }: { data: ActibityCardData }
         </button>
       </div>
       {isDropShow && (
-        <div className='absolute bottom-[-12.7rem] right-0 flex flex-col rounded-md border-[#DDD] border max-lg:bottom-[-11.7rem] max-md:bottom-[-9.3rem]'>
+        <div className='absolute z-10 bottom-[-12.7rem] bg-white right-0 flex flex-col rounded-md border-[#DDD] border max-lg:bottom-[-11.7rem] max-md:bottom-[-9.3rem]'>
           <button
             type='button'
             className='flex justify-center items-center px-[4.6rem] py-[1.8rem] text-[1.8rem] text-[#4B4B4B] leading-[2.2rem] font-medium border-[#DDD] border-b max-lg:text-[1.6rem] max-lg:px-[3.4rem] max-lg:py-[1.4rem] max-md:text-[1.2rem] max-md:px-[2.8rem] max-md:py-[1rem]'

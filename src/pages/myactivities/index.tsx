@@ -1,4 +1,36 @@
+import AcitivitiesCardList from '@/components/CardList/AcitivitiesCardList';
 import Link from 'next/link';
+
+const cardsData = [
+  {
+    id: 0,
+    userId: 0,
+    title: 'string',
+    description: 'string',
+    category: 'string',
+    price: 11110,
+    address: 'string',
+    bannerImageUrl: '',
+    rating: 20,
+    reviewCount: 1110,
+    createdAt: 'string',
+    updatedAt: 'string',
+  },
+  {
+    id: 1,
+    userId: 1,
+    title: 'string',
+    description: 'string',
+    category: 'string',
+    price: 22220,
+    address: 'string',
+    bannerImageUrl: '',
+    rating: 8000,
+    reviewCount: 1110,
+    createdAt: 'string',
+    updatedAt: 'string',
+  },
+];
 
 export default function MyActivities() {
   return (
@@ -9,6 +41,7 @@ export default function MyActivities() {
           체험 등록하기
         </Link>
       </div>
+      <AcitivitiesCardList activities={cardsData} />
     </main>
   );
 }
