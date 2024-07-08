@@ -3,7 +3,7 @@ import React from 'react';
 interface Props {
   text: string;
   color: 'black' | 'white';
-  onClick: () => void;
+  onClick: () => void | Promise<void>;
   width?: string;
   height?: string;
 }
