@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import CustomButton from '@/components/Button/CustomButton';
-import GrayButton from '@/components/Button/GrayButton';
 import useModal from '@/hooks/useModal';
 import Card from '@/components/Card';
 import MyActibitiyCardInfo from '@/components/Card/myActibityCardInfo';
 import AcitivitiesCardList from '@/components/CardList/AcitivitiesCardList';
 import Pagination from '@/components/Pagination';
+import Button from '@/components/Button';
 
 export const getStaticProps = async () => ({
   props: {
@@ -29,13 +28,12 @@ const cardData = {
 };
 
 function Index() {
+  const { openModal, closeModal } = useModal();
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-
-  const { openModal, closeModal } = useModal();
 
   // Example Modal ------------------------
   const handleOpenAlertModal = () => {
@@ -61,21 +59,21 @@ function Index() {
 
   return (
     <>
-      <CustomButton text='로그인 하기' color='black' onClick={() => alert('로그인 하기')} />
+      <Button text='로그인 하기' color='black' />
       <hr />
-      <CustomButton text='로그인 하기' color='white' onClick={() => alert('로그인 하기')} />
+      <Button text='로그인 하기' color='white' />
       <hr />
-      <GrayButton text='신청 불가' onClick={() => alert('신청 불가')} />
+      <Button text='신청 불가' color='black' disabled />
       <hr />
-      <CustomButton text='alert 모달 열기' color='white' onClick={handleOpenAlertModal} />
-      <hr />
-      <CustomButton text='confirm 모달 열기' color='white' onClick={handleOpenConfirmModal} />
-
       <Card image='/images/test123.png'>
         <MyActibitiyCardInfo data={cardData} />
       </Card>
       <hr />
       <Pagination currentPage={currentPage} totalPages={12} onPageChange={handlePageChange} />
+      <hr />
+      <Button text='alert 모달 열기' color='white' onClick={handleOpenAlertModal} />
+      <hr />
+      <Button text='confirm 모달 열기' color='white' onClick={handleOpenConfirmModal} />
       <hr />
       <AcitivitiesCardList activities={[]} />
     </>
