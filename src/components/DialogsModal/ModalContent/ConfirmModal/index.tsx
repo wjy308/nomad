@@ -1,4 +1,4 @@
-import CustomButton from '@/components/Button/CustomButton';
+import Button from '@/components/Button';
 import Image from 'next/image';
 import { IModalContentProps } from '@/types/DialogsModal';
 import { ICON } from '@/constant/importImages';
@@ -13,8 +13,8 @@ function ConfirmModal({ modalData, closeFunction }: IModalContentProps) {
         <span className='font-[500] text-[1.8rem] text-[#333236] leading-[2.148rem]'>{modalData.content}</span>
       </div>
       <div className='flex gap-[0.8rem]'>
-        <CustomButton width='w-[8rem]' text={modalData.btnName[0]} color='white' onClick={closeFunction} />
-        {modalData.btnName[1] !== undefined && <CustomButton width='w-[8rem]' text={modalData.btnName[1]} color='black' onClick={modalData.callBackFnc ? modalData.callBackFnc : closeFunction} />}
+        <Button cssName='w-[8rem]' text={modalData.btnName[0]} color='white' onClick={closeFunction} />
+        {modalData.btnName[1] !== undefined && <Button cssName='w-[8rem]' text={modalData.btnName[1]} color='black' onClick={modalData.callBackFnc ? modalData.callBackFnc : closeFunction} />}
       </div>
     </div>
   );
