@@ -5,6 +5,7 @@ import useModal from '@/hooks/useModal';
 import Card from '@/components/Card';
 import MyActibitiyCardInfo from '@/components/Card/myActibityCardInfo';
 import Pagination from '@/components/Pagination';
+import SideNavigation from '@/components/SideNavigation';
 
 export const getStaticProps = async () => ({
   props: {
@@ -60,6 +61,8 @@ function Index() {
       </Card>
       <hr />
       <Pagination currentPage={currentPage} totalPages={12} onPageChange={handlePageChange} />
+      <hr />
+      <SideNavigation />
       <hr />
     </>
   );
