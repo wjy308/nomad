@@ -11,7 +11,15 @@ export const getStaticProps = async () => ({
 export function Index() {
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(true);
 
-  useEffect(() => visibleFooter(setIsMobileOrTablet), []);
+  useEffect(() => {
+    const cleanup = visibleFooter(setIsMobileOrTablet);
+
+    return () => {
+      if (cleanup) {
+        cleanup();
+      }
+    };
+  }, []);
 
   return (
     <>
