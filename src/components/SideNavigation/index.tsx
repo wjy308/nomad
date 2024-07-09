@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ICON } from '@/constant/importImages';
+import { ICON, IMAGE } from '@/constant/importImages';
 import SIDE_NAV_OPTIONS from '@/constant/sideNavOptions';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -10,13 +10,7 @@ function SideNavigation() {
   return (
     <div className='md:w-[38.4rem] w-[25rem] border border-[#DDDDDD] shadow-[0_0.2rem_0.2rem_0_#112211] p-[2.4rem] rounded-[1.2rem] flex flex-col gap-[2.4rem] items-center bg-[#FFFFFF]'>
       <div className='relative'>
-        <Image
-          width={160}
-          height={160}
-          className='size-[16rem] object-cover rounded-[50%]'
-          src='https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/5-3_547_1720435707707.png'
-          alt='123'
-        />
+        <Image width={160} height={160} className='size-[16rem] object-cover rounded-[50%]' src={IMAGE.avatar.default.src} alt={IMAGE.avatar.default.alt} />
         <button type='button' className='size-[4.4rem] bg-[#0B3B2D] rounded-[50%] flex justify-center items-center absolute bottom-0 right-[1.25rem]'>
           <Image width={24} height={24} src={ICON.pen.default.src} alt={ICON.pen.default.alt} />
         </button>
