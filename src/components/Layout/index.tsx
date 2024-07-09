@@ -4,13 +4,14 @@ import Footer from './Footer';
 
 type Children = {
   children: ReactNode;
+  showFooter?: boolean;
 };
-export default function Layout({ children }: Children) {
+export default function Layout({ children, showFooter = true }: Children) {
   return (
     <>
       <Header />
       <div>{children}</div>
-      <Footer />
+      {showFooter && <Footer />}
     </>
   );
 }
