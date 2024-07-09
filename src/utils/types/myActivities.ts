@@ -18,3 +18,18 @@ export interface GETMyActivities {
   totalCount: number;
   activities: Activity[];
 }
+
+export interface POSTActivitiesReq {
+  title: string;
+  category: string;
+  description: string;
+  address: string;
+  price: number;
+  schedules: {
+    date: string;
+    startTime: string;
+    endTime: string;
+  }[];
+  bannerImageUrl: string;
+  subImageUrls: string[];
+}
