@@ -33,7 +33,7 @@ export default function MyActibitiyCardInfo({ data }: { data: Activity }) {
           }}
           className='relative w-[4rem] h-[4rem] max-md:w-[3.2rem] max-md:h-[3.2rem]'
         >
-          <Image src='/svgs/icon_meatball.svg' fill alt='' />
+          <Image src='/icons/Icon_meatball.svg' fill alt='' />
         </button>
       </div>
       {isDropShow && (
@@ -41,7 +41,7 @@ export default function MyActibitiyCardInfo({ data }: { data: Activity }) {
           <button
             type='button'
             onClick={() => {
-              console.log('수정하기');
+              '수정하기';
             }}
             className='flex justify-center items-center px-[4.6rem] py-[1.8rem] text-[1.8rem] text-[#4B4B4B] leading-[2.2rem] font-medium border-[#DDD] border-b max-lg:text-[1.6rem] max-lg:px-[3.4rem] max-lg:py-[1.4rem] max-md:text-[1.2rem] max-md:px-[2.8rem] max-md:py-[1rem]'
           >
@@ -50,7 +50,7 @@ export default function MyActibitiyCardInfo({ data }: { data: Activity }) {
           <button
             type='button'
             onClick={() => {
-              console.log('삭제하기');
+              '삭제하기';
             }}
             className='flex justify-center items-center text-[1.8rem] text-[#4B4B4B] font-medium px-[4.6rem] leading-[2.2rem] py-[1.8rem] max-lg:text-[1.6rem] max-lg:px-[3.4rem] max-lg:py-[1.4rem] max-md:text-[1.2rem] max-md:px-[2.8rem] max-md:py-[1rem]'
           >
