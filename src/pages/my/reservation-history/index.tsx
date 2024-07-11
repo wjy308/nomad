@@ -47,7 +47,7 @@ const mockData = [
 ];
 
 function ReservationHistory() {
-  const [reservationList, setReservationList] = useState(mockData);
+  const [reservationList] = useState(mockData);
 
   return (
     <section className='pt-[14.2rem] pb-[15rem] px-[2rem] max-w-[124rem] mx-auto flex gap-[2.4rem] items-start'>
