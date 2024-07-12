@@ -6,6 +6,9 @@ import AcitivitiesCardList from '@/components/CardList/AcitivitiesCardList';
 import Pagination from '@/components/Pagination';
 import SideNavigation from '@/components/SideNavigation';
 import Button from '@/components/Button';
+import { filterCategories } from '@/constant/filterCategoryOptions';
+import CategoryButton from '@/components/FilterButton/CategoryButton';
+import FilterDropButton from '@/components/FilterButton/FilterDropButton';
 
 export const getStaticProps = async () => ({
   props: {
@@ -58,6 +61,11 @@ function Index() {
   };
   // ------------------------------------
 
+  // Example FilterButton ------------------------
+  const [selectedCategory, setSelectedCategory] = useState<string>();
+
+  // --------------------------------------
+
   return (
     <>
       <Button text='로그인 하기' color='black' />
@@ -79,6 +87,11 @@ function Index() {
       <Button text='confirm 모달 열기' color='white' onClick={handleOpenConfirmModal} />
       <hr />
       <AcitivitiesCardList activities={[]} />
+      <hr />
+      {filterCategories.map((category) => (
+        <CategoryButton key={category} text={category} isSelected={selectedCategory === category} onClick={() => setSelectedCategory(category)} />
+      ))}
+      <FilterDropButton text='가격' />
     </>
   );
 }

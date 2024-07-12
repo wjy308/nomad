@@ -1,5 +1,6 @@
 import Card from '@/components/Card';
-import MyActibitiyCardInfo from '@/components/Card/myActibityCardInfo';
+
+import FilterDropButton from '@/components/FilterButton/FilterDropButton';
 import SideNavigation from '@/components/SideNavigation';
 import { useState } from 'react';
 
@@ -55,12 +56,13 @@ function ReservationHistory() {
       <div className='w-full'>
         <div className='flex justify-between items-center'>
           <h1 className='text-[3.2rem] font-[700] leading-[3.819rem]'>예약 내역</h1>
-          <div>필터박스</div>
+          <FilterDropButton text='필터' />
         </div>
         <div className='pt-[1.6rem] flex flex-col gap-[2.4rem]'>
           {reservationList.map((item) => (
             <Card key={item.data.title} image={item.image}>
-              <MyActibitiyCardInfo data={{ title: item.data.title, price: item.data.price, rating: item.data.rating, reviewCount: item.data.reviewCount, description: item.data.description }} />
+              {/* <MyReservationCardInfo data={{ title: item.data.title, price: item.data.price, rating: item.data.rating, reviewCount: item.data.reviewCount, description: item.data.description }} /> */}
+              test
             </Card>
           ))}
         </div>
