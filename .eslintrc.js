@@ -26,9 +26,15 @@ module.exports = {
     'prettier/prettier': 'error',
     'react/react-in-jsx-scope': 'off', // Next.js doesn't require React to be in scope
     'react/prop-types': 'off',
-    'no-console':'error',
-    "react/jsx-props-no-spreading":'off',
-    "react/require-default-props": "warn",
+    'no-console': 'error',
+    'react/jsx-props-no-spreading': 'off',
+    'react/require-default-props': 'warn',
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        some: ['nesting', 'id'],
+      },
+    ],
   },
   settings: {
     react: {

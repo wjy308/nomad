@@ -4,14 +4,13 @@ import Footer from './Footer';
 
 type Children = {
   children: ReactNode;
-  showFooter?: boolean;
 };
-export default function Layout({ children, showFooter = true }: Children) {
+export default function Layout({ children }: Children) {
   return (
     <>
       <Header />
-      <div>{children}</div>
-      {showFooter && <Footer />}
+      <div className='pt-[7rem]'>{children}</div>
+      <Footer />
     </>
   );
 }

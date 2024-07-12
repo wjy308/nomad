@@ -14,15 +14,9 @@ export default function App({ Component, pageProps }: AppProps) {
     switch (pageProps.layoutType) {
       case 'removeLayout':
         return <Component {...pageProps} />;
-      case 'removeFooter':
-        return (
-          <Layout showFooter={false}>
-            <Component {...pageProps} />
-          </Layout>
-        );
       default:
         return (
-          <Layout showFooter>
+          <Layout>
             <Component {...pageProps} />
           </Layout>
         );
