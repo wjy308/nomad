@@ -1,49 +1,118 @@
 import Card from '@/components/Card';
-
+import MyReservationCardInfo from '@/components/Card/myReservationCardInfo';
 import FilterDropButton from '@/components/FilterButton/FilterDropButton';
 import SideNavigation from '@/components/SideNavigation';
+import { IReservationCardInfo } from '@/types/ReservationInfo';
 import { useState } from 'react';
 
-const mockData = [
+const mockData: IReservationCardInfo[] = [
   {
-    image: '/images/test123.png',
-    data: { title: '테스트 1', price: 10000, rating: 4.31, reviewCount: 2039, description: '함께 배우면 즐거운 스트릿 댄스 1' },
+    id: 1,
+    activity: {
+      bannerImageUrl: '/images/test123.png',
+      title: 'Mountain Hiking',
+      id: 101,
+    },
+    scheduleId: 1001,
+    status: 'confirmed',
+    reviewSubmitted: false,
+    totalPrice: 150.0,
+    headCount: 5,
+    date: '2024-08-01',
+    startTime: '08:00',
+    endTime: '12:00',
+    createdAt: '2024-07-01T10:00:00Z',
+    updatedAt: '2024-07-02T12:00:00Z',
   },
   {
-    image: '/images/test123.png',
-    data: { title: '테스트 2', price: 20000, rating: 4.29, reviewCount: 2038, description: '함께 배우면 즐거운 스트릿 댄스 2' },
+    id: 2,
+    activity: {
+      bannerImageUrl: '/images/test123.png',
+      title: 'City Tour',
+      id: 102,
+    },
+    scheduleId: 1002,
+    status: 'pending',
+    reviewSubmitted: false,
+    totalPrice: 75.0,
+    headCount: 2,
+    date: '2024-08-05',
+    startTime: '10:00',
+    endTime: '14:00',
+    createdAt: '2024-07-02T11:00:00Z',
+    updatedAt: '2024-07-03T13:00:00Z',
   },
   {
-    image: '/images/test123.png',
-    data: { title: '테스트 3', price: 30000, rating: 4.35, reviewCount: 2037, description: '함께 배우면 즐거운 스트릿 댄스 3' },
+    id: 3,
+    activity: {
+      bannerImageUrl: '/images/test123.png',
+      title: 'Wine Tasting',
+      id: 103,
+    },
+    scheduleId: 1003,
+    status: 'declined',
+    reviewSubmitted: false,
+    totalPrice: 200.0,
+    headCount: 4,
+    date: '2024-08-10',
+    startTime: '16:00',
+    endTime: '19:00',
+    createdAt: '2024-07-03T09:00:00Z',
+    updatedAt: '2024-07-04T15:00:00Z',
   },
   {
-    image: '/images/test123.png',
-    data: { title: '테스트 4', price: 40000, rating: 4.22, reviewCount: 2036, description: '함께 배우면 즐거운 스트릿 댄스 4' },
+    id: 4,
+    activity: {
+      bannerImageUrl: '/images/test123.png',
+      title: 'Cooking Class',
+      id: 104,
+    },
+    scheduleId: 1004,
+    status: 'canceled',
+    reviewSubmitted: false,
+    totalPrice: 120.0,
+    headCount: 3,
+    date: '2024-08-12',
+    startTime: '11:00',
+    endTime: '14:00',
+    createdAt: '2024-07-04T10:00:00Z',
+    updatedAt: '2024-07-05T12:00:00Z',
   },
   {
-    image: '/images/test123.png',
-    data: { title: '테스트 5', price: 50000, rating: 4.15, reviewCount: 2035, description: '함께 배우면 즐거운 스트릿 댄스 5' },
+    id: 5,
+    activity: {
+      bannerImageUrl: '/images/test123.png',
+      title: 'Kayaking',
+      id: 105,
+    },
+    scheduleId: 1005,
+    status: 'completed',
+    reviewSubmitted: true,
+    totalPrice: 180.0,
+    headCount: 6,
+    date: '2024-07-20',
+    startTime: '09:00',
+    endTime: '13:00',
+    createdAt: '2024-07-05T08:00:00Z',
+    updatedAt: '2024-07-20T14:00:00Z',
   },
   {
-    image: '/images/test123.png',
-    data: { title: '테스트 6', price: 60000, rating: 4.45, reviewCount: 2034, description: '함께 배우면 즐거운 스트릿 댄스 6' },
-  },
-  {
-    image: '/images/test123.png',
-    data: { title: '테스트 7', price: 70000, rating: 4.19, reviewCount: 2033, description: '함께 배우면 즐거운 스트릿 댄스 7' },
-  },
-  {
-    image: '/images/test123.png',
-    data: { title: '테스트 8', price: 80000, rating: 4.34, reviewCount: 2032, description: '함께 배우면 즐거운 스트릿 댄스 8' },
-  },
-  {
-    image: '/images/test123.png',
-    data: { title: '테스트 9', price: 90000, rating: 4.25, reviewCount: 2031, description: '함께 배우면 즐거운 스트릿 댄스 9' },
-  },
-  {
-    image: '/images/test123.png',
-    data: { title: '테스트 10', price: 100000, rating: 4.47, reviewCount: 2030, description: '함께 배우면 즐거운 스트릿 댄스 10' },
+    id: 6,
+    activity: {
+      bannerImageUrl: '/images/test123.png',
+      title: 'Yoga Retreat',
+      id: 106,
+    },
+    scheduleId: 1006,
+    status: 'confirmed',
+    reviewSubmitted: false,
+    totalPrice: 250.0,
+    headCount: 8,
+    date: '2024-08-15',
+    startTime: '07:00',
+    endTime: '10:00',
+    createdAt: '2024-07-06T09:00:00Z',
+    updatedAt: '2024-07-07T11:00:00Z',
   },
 ];
 
@@ -60,9 +129,8 @@ function ReservationHistory() {
         </div>
         <div className='pt-[1.6rem] flex flex-col gap-[2.4rem]'>
           {reservationList.map((item) => (
-            <Card key={item.data.title} image={item.image}>
-              {/* <MyReservationCardInfo data={{ title: item.data.title, price: item.data.price, rating: item.data.rating, reviewCount: item.data.reviewCount, description: item.data.description }} /> */}
-              test
+            <Card key={item.activity.title} image={item.activity.bannerImageUrl}>
+              <MyReservationCardInfo data={item} />
             </Card>
           ))}
         </div>

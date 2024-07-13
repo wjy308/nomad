@@ -1,22 +1,27 @@
 import Button from '@/components/Button';
-import { Activity } from '@/utils/types/myActivities';
-import Image from 'next/image';
+import { IReservationCardInfo } from '@/types/ReservationInfo';
+import setReservationStatueInfo from '@/utils/setReservationStatueInfo';
 
-export default function MyActibitiyCardInfo({ data }: { data: Activity }) {
-  const { title, price, rating, reviewCount } = data;
+export default function MyActibitiyCardInfo({ data }: { data: IReservationCardInfo }) {
+  const { activity, status, totalPrice, date, startTime, endTime, headCount } = data;
+  const statusInfo = setReservationStatueInfo(status);
+  const btnCss = 'w-[12.1rem] h-[4rem] text-[1.4rem]';
 
   return (
-    <div className='relative flex flex-col self-center justify-center w-full h-[16.2rem] max-lg:h-[13.1rem] max-sm:h-[10.4rem]'>
-      <div className='flex gap-x-[0.6rem]'>
-        <div className='relative w-[1.9rem] h-[1.9rem] max-md:w-[1.6rem] max-md:h-[1.6rem]'>
-          <Image src='/svgs/star.svg' fill alt='' />
-        </div>
-        <span className='text-[#1b1b1b] leading-[1.9rem] text-[1.6rem] max-md:text-[1.4rem] max-md:leading-[1.6rem]'>{`${rating} (${reviewCount})`}</span>
+    <div className='relative flex flex-col justify-center w-full'>
+      <span className={`leading-[2.6rem] font-[700] text-[1.6rem] ${statusInfo.btnColor}`}>{statusInfo.name}</span>
+      <h3 className='text-[2rem] font-[700] leading-[2.6rem] text-[#112211] mt-[0.8rem]'>{activity.title}</h3>
+      <div className='text-[1.8rem] font-[400] leading-[2.4rem] pt-[1.2rem]'>
+        <span>{date}</span> ·
+        <span>
+          {startTime} - {endTime}
+        </span>
+        · <span>{headCount}명</span>
       </div>
-      <h3 className='mt-[0.6rem] text-[2rem] font-bold leading-[2.6rem] text-[#121] max-lg:text-[1.8rem] max-md:text-[1.4rem] max-md:mt-0'>{title}</h3>
-      <div className='flex justify-between mt-[7.2rem] max-lg:mt-[4.8rem] max-md:mt-[2.9rem]'>
-        <span className='text-[2.4rem] text-[#1b1b1b] leading-[4rem] font-medium max-lg:text-[2rem] max-md:text-[1.6rem] max-md:leading-[3.2rem]'>₩{price.toLocaleString('ko-KR')}</span>
-        <Button text='후기 작성' color='black' cssName='w-[12.1rem] h-[4rem] text-[1.4rem]' />
+      <div className='flex justify-between mt-[1.6rem]'>
+        <span className='text-[2.4rem] text-[#1b1b1b] leading-[2.864rem] font-[500]'>₩{totalPrice.toLocaleString('ko-KR')}</span>
+        {statusInfo.name === '예약 신청' && <Button text='예약 취소' color='white' cssName={btnCss} />}
+        {statusInfo.name === '체험 완료' && <Button text='후기 작성' color='black' cssName={btnCss} />}
       </div>
     </div>
   );

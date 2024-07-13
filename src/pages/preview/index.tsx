@@ -9,6 +9,7 @@ import Button from '@/components/Button';
 import { filterCategories } from '@/constant/filterCategoryOptions';
 import CategoryButton from '@/components/FilterButton/CategoryButton';
 import FilterDropButton from '@/components/FilterButton/FilterDropButton';
+import { Input } from '@/components/Input';
 
 export const getStaticProps = async () => ({
   props: {
@@ -92,6 +93,8 @@ function Index() {
         <CategoryButton key={category} text={category} isSelected={selectedCategory === category} onClick={() => setSelectedCategory(category)} />
       ))}
       <FilterDropButton text='가격' />
+      <br />
+      <Input type='email' />
     </>
   );
 }
