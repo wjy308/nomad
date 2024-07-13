@@ -9,7 +9,7 @@ export default function FormHeader() {
     <div className='flex justify-center w-full'>
       <Link href='/'>
         <div className='relative md:w-[34rem] md:h-[19.2rem] w-[27rem] h-[15.4rem]'>
-          <Image className='w-full h-full object-cover' src={logo.auth.src} alt={logo.auth.alt} sizes={'100%'} fill priority />
+          <Image className='w-full h-full object-cover' src={logo.auth.src} alt={logo.auth.alt} sizes='100%' fill priority />
         </div>
       </Link>
     </div>

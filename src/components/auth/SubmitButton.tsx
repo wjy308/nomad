@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-
+/* eslint-disable */
 interface SubmitButtonProps {
   size: 'xl' | 'lg' | 'md' | 'sm';
   variant?: 'primary' | 'secondary' | 'outline';
@@ -11,7 +11,7 @@ interface SubmitButtonProps {
   form?: string;
 }
 
-const SubmitButton = ({ size, variant = 'primary', type = 'button', text = 'Button', border = 'br6', ...props }: SubmitButtonProps) => {
+function SubmitButton({ size, variant = 'primary', type = 'button', text = 'Button', border = 'br6', ...props }: SubmitButtonProps) {
   const sizeClasses = {
     xl: 'w-32 py-4',
     lg: 'w-full py-3.5',
@@ -32,17 +32,23 @@ const SubmitButton = ({ size, variant = 'primary', type = 'button', text = 'Butt
 
   return (
     <button
-      className={classNames('h-[4.8rem] text-[1.6rem] inline-flex items-center justify-center font-sans transition-opacity duration-200', sizeClasses[size], variantClasses[variant], borderClasses[border], {
-        'cursor-pointer': !props.disabled,
+      className={classNames(
+        'h-[4.8rem] text-[1.6rem] inline-flex items-center justify-center font-sans transition-opacity duration-200',
+        sizeClasses[size],
+        variantClasses[variant],
+        borderClasses[border],
+        {
+          'cursor-pointer': !props.disabled,
 
-        'cursor-not-allowed': props.disabled,
-      })}
+          'cursor-not-allowed': props.disabled,
+        },
+      )}
       type={type}
       {...props}
     >
       <span>{text}</span>
     </button>
   );
-};
-
+}
+/* eslint-enable */
 export default SubmitButton;

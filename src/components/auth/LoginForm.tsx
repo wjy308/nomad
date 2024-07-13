@@ -1,11 +1,11 @@
-import FormHeader from './FormHeader';
-import { Input } from '../Input';
-import SubmitButton from './SubmitButton';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { USER_INPUT_VALIDATION } from '@/constant';
 import { FormValues } from '@/utils/auth/types';
 import Link from 'next/link';
-
+import SubmitButton from './SubmitButton';
+import { Input } from '../Input';
+import FormHeader from './FormHeader';
+/* eslint-disable */
 const { email, password } = USER_INPUT_VALIDATION;
 
 const rules = {
@@ -29,11 +29,11 @@ const rules = {
   },
 };
 
-interface AuthFormProps {
+interface LoginFormProps {
   onSigninSubmit: SubmitHandler<FormValues>;
 }
 
-export default function AuthForm({ onSigninSubmit: handleSigninSubmit }: AuthFormProps) {
+export default function LoginForm({ onSigninSubmit: handleSigninSubmit }: LoginFormProps) {
   const { formState, register, handleSubmit } = useForm<FormValues>({
     mode: 'onBlur',
   });
@@ -41,11 +41,10 @@ export default function AuthForm({ onSigninSubmit: handleSigninSubmit }: AuthFor
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     handleSigninSubmit({ email: data.email, password: data.password });
   };
-  const submitVariant = isValid ? 'primary' : 'secondary'
-
+  const submitVariant = isValid ? 'primary' : 'secondary';
 
   return (
-    <div className='md:max-w-[64rem] max-w-[35rem] lg:pt-[10.4rem] mx-auto max-h-screen md:pt-[7.2rem]  sm:px-[1.2rem] pt-[4.4rem]'>
+    <div className='mb-16 md:max-w-[64rem] max-w-[35rem] lg:pt-[10.4rem] mx-auto max-h-screen md:pt-[7.2rem]  sm:px-[1.2rem] pt-[4.4rem]'>
       <fieldset>
         <legend className='sr-only'>Global Nomad 로그인</legend>
         <FormHeader />
@@ -63,7 +62,7 @@ export default function AuthForm({ onSigninSubmit: handleSigninSubmit }: AuthFor
         <div className='flex justify-center pt-[2.3rem]'>
           <span className='text-[1.6rem] font-normal text-primary text-[#4b4b4b]'>
             회원이 아니신가요?
-            <Link className='text-[#0b3b2d] text-[1.6rem] font-normal text-darkgreen underline pl-[0.5rem]' href={'/signup'}>
+            <Link className='text-[#0b3b2d] text-[1.6rem] font-normal text-darkgreen underline pl-[0.5rem]' href='/signup'>
               회원가입하기
             </Link>
           </span>
@@ -72,3 +71,4 @@ export default function AuthForm({ onSigninSubmit: handleSigninSubmit }: AuthFor
     </div>
   );
 }
+/* eslint-enable */

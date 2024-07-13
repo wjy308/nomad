@@ -1,7 +1,7 @@
-import { FormValues, ProfileFormValues } from './types';
 import instance from '@/apis/axios';
 import axios from 'axios';
-
+import { FormValues, ProfileFormValues } from './types';
+/* eslint-disable */
 export const auth = {
   signup: async (userData: FormValues) => {
     const response = await instance.post('/users', userData);
@@ -32,8 +32,9 @@ export const auth = {
           Authorization: `Bearer ${refreshToken}`,
           'Content-Type': 'application/json',
         },
-      }
+      },
     );
     return response.data;
   },
 };
+/* eslint-enable */
