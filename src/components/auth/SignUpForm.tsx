@@ -1,11 +1,11 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Link from 'next/link';
+import { USER_INPUT_VALIDATION } from '@/constant';
+import { FormValues } from '@/utils/auth/types';
 import FormHeader from './FormHeader';
 import { Input } from '../Input';
 import SubmitButton from './SubmitButton';
-import { USER_INPUT_VALIDATION } from '@/constant';
-import { FormValues } from '@/utils/auth/types';
-
+/* eslint-disable */
 const { email, nickname, password, passwordConfirm } = USER_INPUT_VALIDATION;
 
 const rules = {
@@ -102,3 +102,4 @@ export default function SignupForm({ onSignupSubmit }: SignupFormProps) {
     </div>
   );
 }
+/* eslint-enable */

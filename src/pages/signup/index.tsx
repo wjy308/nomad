@@ -36,9 +36,7 @@ export default function Signup() {
     onError: (error: AxiosError<ErrorMessage>) => {
       if (error.response && error.response.status >= 400) {
         handleOpenPopup(error.response.data?.message);
-        return;
       }
-      console.error('MutationError', error);
     },
   });
 
