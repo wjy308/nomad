@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import useModal from '@/hooks/useModal';
-import Card from '@/components/Card';
-import MyActibitiyCardInfo from '@/components/Card/myActibityCardInfo';
-import AcitivitiesCardList from '@/components/CardList/AcitivitiesCardList';
 import Pagination from '@/components/Pagination';
 import SideNavigation from '@/components/SideNavigation';
 import Button from '@/components/Button';
@@ -12,21 +9,6 @@ export const getStaticProps = async () => ({
     layoutType: 'removeLayout',
   },
 });
-
-const cardData = {
-  id: 0,
-  userId: 0,
-  title: 'string',
-  description: 'string',
-  category: 'string',
-  price: 11110,
-  address: 'string',
-  bannerImageUrl: 'string',
-  rating: 20,
-  reviewCount: 1110,
-  createdAt: 'string',
-  updatedAt: 'string',
-};
 
 function Index() {
   const { openModal, closeModal } = useModal();
@@ -56,19 +38,22 @@ function Index() {
       },
     });
   };
+
+  const showAlert = () => {
+    alert('로그인 하기');
+  };
+
   // ------------------------------------
 
   return (
     <>
-      <Button text='로그인 하기' color='black' />
+      <p>버튼 컴포넌트를 수정해서 기존에 있던 CustomButton이 아닌 Button을 사용하시면 됩니다.</p>
+      <p className='font-bold'>스타일 예시 cssName=w-[48rem] h-[4rem] </p>
+      <Button text='로그인 하기' color='black' onClick={showAlert} />
       <hr />
-      <Button text='로그인 하기' color='white' />
+      <Button text='로그인 하기' color='white' onClick={showAlert} />
       <hr />
       <Button text='신청 불가' color='black' disabled />
-      <hr />
-      <Card image='/images/test123.png'>
-        <MyActibitiyCardInfo data={cardData} />
-      </Card>
       <hr />
       <Pagination currentPage={currentPage} totalPages={12} onPageChange={handlePageChange} />
       <hr />
@@ -78,7 +63,6 @@ function Index() {
       <hr />
       <Button text='confirm 모달 열기' color='white' onClick={handleOpenConfirmModal} />
       <hr />
-      <AcitivitiesCardList activities={[]} />
     </>
   );
 }

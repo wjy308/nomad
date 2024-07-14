@@ -20,6 +20,8 @@
     "@tanstack/react-query-devtools": "^5.49.2",
     "axios": "^1.7.2",
     "dayjs": "^1.11.11",
+    "date-fns": "^3.6.0",
+    "classnames": "^2.5.1",
     "moment": "^2.30.1",
     "next": "14.2.4",
     "qs": "^6.12.2",
@@ -27,6 +29,7 @@
     "react-calendar": "^5.0.0",
     "react-dom": "^18",
     "react-hook-form": "^7.52.1",
+    "react-intersection-observer": "^9.12.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -34,6 +37,7 @@
     "@types/node": "^20",
     "@types/qs": "^6.9.15",
     "@types/react": "^18",
+    "@types/react-datepicker": "^6.2.0",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
