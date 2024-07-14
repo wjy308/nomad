@@ -26,7 +26,7 @@ function FilterDropButton({ text }: FilterDropButtonProps) {
       <button
         type='button'
         onClick={handleToggle}
-        className='sm:w-[16rem] w-[10.7rem] px-[1.6rem] py-[2rem] rounded-[1.5rem] border text-[#0B3B2D] text-[1.8rem] font-[500] bg-[#FFFFFF] border-[#0B3B2D] flex items-center justify-between'
+        className='sm:w-[16rem] w-[10.7rem] px-[2rem] py-[1.6rem] rounded-[1.5rem] border text-[#0B3B2D] text-[1.8rem] font-[500] bg-[#FFFFFF] border-[#0B3B2D] flex items-center justify-between'
       >
         {currentOption}
         <span className={`ml-2 transform transition-transform ${isOpen ? 'rotate-180' : 'rotate-0'}`}>▼</span>
