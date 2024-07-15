@@ -14,4 +14,4 @@ const useCategoryFilterStore = create<CategoryFilterState>((set) => ({
   setMainFilter: (mainFilter) => set({ mainFilter }),
 }));
 
-export default useCategoryFilterStore
+export default useCategoryFilterStore;

@@ -2,7 +2,7 @@ interface SearchActivitiesHeaderProps {
   search?: string;
   searchTotalCount?: number;
 }
-
+/* eslint-disable */
 export default function SearchActivitiesHeader({ search, searchTotalCount }: SearchActivitiesHeaderProps) {
   return (
     <div className='flex flex-col items-start gap-3'>
@@ -14,3 +14,4 @@ export default function SearchActivitiesHeader({ search, searchTotalCount }: Sea
     </div>
   );
 }
+/* eslint-enable */

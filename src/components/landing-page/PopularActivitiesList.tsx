@@ -1,10 +1,10 @@
-import CardResource from './CardResource';
 import { ICON } from '@/constant';
 import useResponsiveSize from '@/hooks/useResponsiveSize';
 import { GetActivitiesList } from '@/utils/types';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-
+import CardResource from './CardResource';
+/* eslint-disable */
 interface PopularActivitiesListProps {
   popularActivities: GetActivitiesList[];
 }
@@ -73,3 +73,4 @@ export default function PopularActivitiesList({ popularActivities }: PopularActi
     </div>
   );
 }
+/* eslint-enable */

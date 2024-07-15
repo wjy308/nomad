@@ -85,7 +85,6 @@ const useResponsiveSize = (P = 8, T = 9, M = 4, S = 4): number => {
 
     if (width < 430) {
       setSizeState(S);
-      return;
     }
   }, [P, T, M, S, width]);
 

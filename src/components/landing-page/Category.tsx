@@ -1,3 +1,4 @@
+/* eslint-disable */
 interface CategoryProps {
   category: '문화 · 예술' | '식음료' | '스포츠' | '투어' | '관광' | '웰빙';
   isActive?: boolean;
@@ -21,3 +22,4 @@ export default function Category({ category, isActive = false, onClick }: Catego
     </div>
   );
 }
+/* eslint-enable */

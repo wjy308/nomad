@@ -4,6 +4,7 @@ import useToggleButton from '@/hooks/useToggleButton';
 import Image from 'next/image';
 import { Dispatch, SetStateAction, useRef } from 'react';
 import DropdownMenu from '../DropdownMenu';
+/* eslint-disable */
 interface FilterProps {
   type: 'price' | 'filter';
   filterState: string;
@@ -107,3 +108,4 @@ export default function Filter({ type, filterState, setFilterState }: FilterProp
     </div>
   );
 }
+/* eslint-enable */

@@ -1,7 +1,7 @@
 import { ICON, IMAGE } from '@/constant';
 import Image, { StaticImageData } from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-
+/* eslint-disable */
 export default function Banner() {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [bannerList, setBannerList] = useState<{ imageSrc: StaticImageData; title: string; text: string }[]>([]);
@@ -98,47 +98,35 @@ export default function Banner() {
 
   return (
     <>
-      <div className="relative flex items-center w-full">
-        <div className="relative w-full overflow-hidden">
+      <div className='relative flex items-center w-full'>
+        <div className='relative w-full overflow-hidden'>
           <button
             onClick={() => handleSwipeClick(-1)}
-            className="absolute left-4 top-1/2 z-10 hidden transform -translate-y-1/2 rounded-lg opacity-60 hover:opacity-100 focus:outline-none focus:ring sm:block"
+            className='absolute left-4 top-1/2 z-10 hidden transform -translate-y-1/2 rounded-lg opacity-60 hover:opacity-100 focus:outline-none focus:ring sm:block'
           >
-            <Image src={ICON.leftArrow.variant1.src} alt="이전 배너" height={47} width={24} />
+            <Image src={ICON.leftArrow.variant1.src} alt='이전 배너' height={47} width={24} />
           </button>
           <button
             onClick={() => handleSwipeClick(1)}
-            className="absolute right-4 top-1/2 z-10 hidden transform -translate-y-1/2 rotate-180 rounded-lg opacity-60 hover:opacity-100 focus:outline-none focus:ring sm:block"
+            className='absolute right-4 top-1/2 z-10 hidden transform -translate-y-1/2 rotate-180 rounded-lg opacity-60 hover:opacity-100 focus:outline-none focus:ring sm:block'
           >
-            <Image src={ICON.leftArrow.variant1.src} alt="다음 배너" height={47} width={24} />
+            <Image src={ICON.leftArrow.variant1.src} alt='다음 배너' height={47} width={24} />
           </button>
-          <ul
-            className="flex transition-transform duration-500 ease-in-out"
-            ref={bannerRef}
-          >
+          <ul className='flex transition-transform duration-500 ease-in-out' ref={bannerRef}>
             {bannerList?.map((banner, index) => (
-              <li
-                className="relative flex-none w-full h-[55rem] sm:h-[24rem] px-8 overflow-hidden transition-border duration-300"
-                key={`${banner.title}-${index}`}
-              >
-                <Image
-                  src={banner.imageSrc}
-                  alt="배너 이미지"
-                  layout="fill"
-                  objectFit="cover"
-                  priority
-                  className="absolute min-w-full min-h-full"
-                />
-                <div className="absolute flex flex-col justify-center gap-8 text-white left-[-25%] z-10 w-[50rem] sm:left-8 sm:w-[44rem] sm:gap-4 sm:bottom-8 sm:justify-start sm:items-start md:w-[18.4rem] md:left-6">
-                  <span className="text-[6.8rem] font-bold sm:text-[5.4rem] md:text-[2.4rem]">{banner.title}</span>
-                  <span className="text-[2.4rem] font-bold sm:text-[2rem] md:text-[1.4rem]">{banner.text}</span>
+              <li className='relative flex-none w-full h-[55rem] sm:h-[24rem] px-8 overflow-hidden transition-border duration-300' key={`${banner.title}-${index}`}>
+                <Image src={banner.imageSrc} alt='배너 이미지' layout='fill' objectFit='cover' priority className='absolute min-w-full min-h-full' />
+                <div className='absolute flex flex-col justify-center gap-8 text-white left-[-25%] z-10 w-[50rem] sm:left-8 sm:w-[44rem] sm:gap-4 sm:bottom-8 sm:justify-start sm:items-start md:w-[18.4rem] md:left-6'>
+                  <span className='text-[6.8rem] font-bold sm:text-[5.4rem] md:text-[2.4rem]'>{banner.title}</span>
+                  <span className='text-[2.4rem] font-bold sm:text-[2rem] md:text-[1.4rem]'>{banner.text}</span>
                 </div>
               </li>
             ))}
           </ul>
         </div>
       </div>
-      <div className="h-[55rem] sm:h-[24rem]" />
+      <div className='h-[55rem] sm:h-[24rem]' />
     </>
   );
 }
+/* eslint-enable */

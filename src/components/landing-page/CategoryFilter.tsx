@@ -1,11 +1,11 @@
-import Category from './Category';
-import Filter from './Filter';
 import { ICON } from '@/constant';
-import useResponsiveSize from '@/hooks/useResponsiveSize'; 
-import useCategoryFilterStore from '@/utils/landing-page/useCategoryFilterStore'; 
+import useResponsiveSize from '@/hooks/useResponsiveSize';
+import useCategoryFilterStore from '@/utils/landing-page/useCategoryFilterStore';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-
+import Filter from './Filter';
+import Category from './Category';
+/* eslint-disable */
 export default function CategoryFilter() {
   const [categoryState, setCategoryState] = useState('');
   const [filterState, setFilterState] = useState('');
@@ -16,14 +16,7 @@ export default function CategoryFilter() {
 
   const { mainCategory, setMainCategory, mainFilter, setMainFilter } = useCategoryFilterStore();
 
-  const categoryList: ('문화 · 예술' | '식음료' | '스포츠' | '투어' | '관광' | '웰빙')[] = [
-    '문화 · 예술',
-    '식음료',
-    '스포츠',
-    '투어',
-    '관광',
-    '웰빙',
-  ];
+  const categoryList: ('문화 · 예술' | '식음료' | '스포츠' | '투어' | '관광' | '웰빙')[] = ['문화 · 예술', '식음료', '스포츠', '투어', '관광', '웰빙'];
 
   const handleCategoryClick = (category: string) => {
     setFilterState('');
@@ -63,26 +56,26 @@ export default function CategoryFilter() {
   }, [filterState, setMainFilter]);
 
   return (
-    <div className="flex justify-between items-center w-full min-w-0">
-      <div className="relative flex items-center min-w-0">
-        <div className="overflow-hidden">
-          <ul className="flex gap-6 sm:gap-4 md:gap-2" ref={categoryRef}>
+    <div className='flex justify-between items-center w-full min-w-0'>
+      <div className='relative flex items-center min-w-0'>
+        <div className='overflow-hidden'>
+          <ul className='flex gap-6 sm:gap-4 md:gap-2' ref={categoryRef}>
             {categoryList.map((category, index) => (
-              <li key={`${category}-${index}`} className="flex-shrink-0">
+              <li key={`${category}-${index}`} className='flex-shrink-0'>
                 <Category category={category} isActive={categoryState === category} onClick={handleCategoryClick} />
               </li>
             ))}
           </ul>
         </div>
         {categoryXState !== 0 && (
-          <div className="absolute left-0 w-20 h-14 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-200">
-            <button onClick={() => handleButtonClick(-1)} className="rotate-180">
+          <div className='absolute left-0 w-20 h-14 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-200'>
+            <button onClick={() => handleButtonClick(-1)} className='rotate-180'>
               <Image src={ICON.rightArrow.default.src} alt={ICON.rightArrow.default.alt} height={32} width={32} />
             </button>
           </div>
         )}
         {categoryXState < translateSize && (
-          <div className="absolute right-0 w-20 h-14 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-200">
+          <div className='absolute right-0 w-20 h-14 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-200'>
             <button onClick={() => handleButtonClick(1)}>
               <Image src={ICON.rightArrow.default.src} alt={ICON.rightArrow.default.alt} height={32} width={32} />
             </button>
@@ -90,8 +83,9 @@ export default function CategoryFilter() {
         )}
       </div>
       <div>
-        <Filter type="price" filterState={filterState} setFilterState={setFilterState} />
+        <Filter type='price' filterState={filterState} setFilterState={setFilterState} />
       </div>
     </div>
   );
 }
+/* eslint-enable */

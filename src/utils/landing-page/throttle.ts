@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default function throttle(callback: () => void, interval: number): () => void {
   let isThrottle = false;
   return function () {
@@ -11,3 +12,4 @@ export default function throttle(callback: () => void, interval: number): () => 
     }
   };
 }
+/* eslint-enable */

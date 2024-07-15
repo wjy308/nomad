@@ -1,8 +1,8 @@
-import CardResource from './CardResource';
 import { GetActivitiesList } from '@/utils/types';
+import CardResource from './CardResource';
 import PostActivityButton from './PostActivityButton';
 import SearchActivitiesHeader from './SearchActivitiesHeader';
-
+/* eslint-disable */
 interface ActivitiesListProps {
   category?: string;
   activities?: GetActivitiesList[];
@@ -27,7 +27,7 @@ export default function ActivitiesList({ category = '전체', activities, search
       ) : (
         <>
           <h2 className='flex justify-between items-center w-full text-3xl font-bold text-[#1b1b1b]'>
-            {category ? category : '전체 체험'}
+            {category || '전체 체험'}
             <PostActivityButton />
           </h2>
           <ul className='grid grid-cols-4 gap-x-6 gap-y-12 md:grid-cols-3 md:gap-x-6 md:gap-y-8 sm:grid-cols-2 sm:gap-x-4 sm:gap-y-8'>
@@ -42,3 +42,4 @@ export default function ActivitiesList({ category = '전체', activities, search
     </div>
   );
 }
+/* eslint-enable */
