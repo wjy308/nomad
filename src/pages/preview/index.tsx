@@ -3,6 +3,10 @@ import useModal from '@/hooks/useModal';
 import Pagination from '@/components/Pagination';
 import SideNavigation from '@/components/SideNavigation';
 import Button from '@/components/Button';
+import { filterCategories } from '@/constant/filterCategoryOptions';
+import CategoryButton from '@/components/FilterButton/CategoryButton';
+import FilterDropButton from '@/components/FilterButton/FilterDropButton';
+import { Input } from '@/components/Input';
 
 export const getStaticProps = async () => ({
   props: {
@@ -45,6 +49,11 @@ function Index() {
 
   // ------------------------------------
 
+  // Example FilterButton ------------------------
+  const [selectedCategory, setSelectedCategory] = useState<string>();
+
+  // --------------------------------------
+
   const colors = [
     { name: 'Black', code: 'var(--color-black)' },
     { name: 'Nomad Black', code: 'var(--color-nomad-black)' },
@@ -86,6 +95,14 @@ function Index() {
       <hr />
       <Button text='confirm 모달 열기' color='white' onClick={handleOpenConfirmModal} />
       <hr />
+
+      {filterCategories.map((category) => (
+        <CategoryButton key={category} text={category} isSelected={selectedCategory === category} onClick={() => setSelectedCategory(category)} />
+      ))}
+      <FilterDropButton text='가격' />
+      <br />
+      <Input type='email' />
+
       <div className='container mx-auto p-[1.6rem]'>
         <h1 className='text-[2.4rem] font-bold mb-[1.6rem]'>미디어 쿼리 확인</h1>
         <div className='bg-gray-500 sm:bg-blue md:bg-green lg:bg-orange xl:bg-red p-[1.6rem] rounded-[0.8rem]'>
