@@ -39,7 +39,7 @@ export default function MyActivities() {
     /* 성공시 response는 falsy값 */
     if (!response) {
       const updatedActivities = activities.filter((activitiy) => activitiy.id !== activitiyId);
-      setActivities((prev) => ({ ...prev, activities: updatedActivities }));
+      setActivities(() => updatedActivities);
     } else {
       alert(response);
       // 임시, 실패할 경우 모달을 띄워 알려줄 예정
