@@ -35,6 +35,10 @@ module.exports = {
         some: ['nesting', 'id'],
       },
     ],
+    'no-console': 'error',
+    'react/jsx-props-no-spreading': 'off',
+    'react/require-default-props': 'warn',
+    '@typescript-eslint/no-explicit-any': 'warn',
   },
   settings: {
     react: {
