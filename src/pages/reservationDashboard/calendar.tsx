@@ -6,9 +6,23 @@ import React, { useState } from 'react';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import 'dayjs/locale/ko';
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from '@heroicons/react/16/solid';
+import BookedBox from '@/components/BookedBox';
 
 dayjs.extend(isoWeek);
 dayjs.locale('ko');
+
+type Status = '예약' | '완료' | '승인';
+type Reservation = {
+  date: string;
+  status: Status;
+};
+const reservations: Reservation[] = [
+  { date: '2024-07-20', status: '예약' },
+  { date: '2024-07-15', status: '완료' },
+  { date: '2024-07-25', status: '승인' },
+  { date: '2024-07-25', status: '예약' },
+  // 추가 예약 데이터
+];
 
 function calendar2() {
   // PR을 위해 임시로 막음
@@ -39,6 +53,9 @@ function calendar2() {
     setCurrentMonth(currentMonth.add(1, 'month'));
   };
 
+  // 임시 코드
+  const getReservationsForDay = (date: string) => reservations.filter((reservation) => dayjs(reservation.date).isSame(date, 'day'));
+
   return (
     <div className='text-[#000] my-[1.6rem]'>
       <div className='flex flex-row items-center justify-between'>
@@ -50,14 +67,22 @@ function calendar2() {
           <ChevronDoubleRightIcon />
         </button>
       </div>
-      <div className='grid grid-cols-7'>
-        {days.map((day, index) => (
-          <button type='button' key={index} className={`p-[1rem] border ${day.isSame(currentMonth, 'month') ? '' : 'bg-gray-100'} ${day.isSame(dayjs(), 'day') ? 'boder border-blue-500' : ''} `}>
-            <div className='text-left '>
-              <span className='inline-block w-1/7 h-[5.4rem]'>{day.date()}</span>
-            </div>
-          </button>
-        ))}
+      <div className='grid grid-cols-7 gap-[0.3rem]'>
+        {days.map((day) => {
+          const reservationsForDay = getReservationsForDay(day.format('YYYY-MM-DD'));
+          return (
+            <button
+              type='button'
+              key={day.format('YYYY-MM-DD')}
+              className={`flex w-1/7 h-[8.4rem] p-[0.3rem] border flex-col ${day.isSame(currentMonth, 'month') ? '' : 'bg-gray-100'}  hover:border-blue hover:border-[0.3rem]`}
+            >
+              <div className='text-left w-[100%]'>
+                <span className={`${day.isSame(dayjs(), 'day') ? 'flex w-[1.5rem] justify-center rounded-[0.2rem] text-white bg-blue-light' : ''}`}>{day.date()}</span>
+              </div>
+              <BookedBox reservations={reservationsForDay} />
+            </button>
+          );
+        })}
       </div>
     </div>
   );
