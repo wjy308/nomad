@@ -185,7 +185,6 @@ export default function PostActivitiy() {
                       type='time'
                       id='startTime'
                       value={schedule.startTime}
-                      max={schedule.endTime}
                       onChange={(e) => {
                         setSchedule((prev) => ({ ...prev, startTime: e.target.value }));
                       }}
@@ -200,7 +199,6 @@ export default function PostActivitiy() {
                       type='time'
                       id='endTime'
                       value={schedule.endTime}
-                      min={schedule.startTime}
                       onChange={(e) => {
                         setSchedule((prev) => ({ ...prev, endTime: e.target.value }));
                       }}
