@@ -48,7 +48,8 @@ function Index() {
   };
 
   // ------------------------------------
-
+  
+  
   // Example FilterButton ------------------------
   const [selectedCategory, setSelectedCategory] = useState<string>();
 
@@ -76,6 +77,7 @@ function Index() {
     { name: 'Blue Light', code: 'var(--color-blue-light)' },
     { name: 'Blue Lighter', code: 'var(--color-blue-lighter)' },
   ];
+
 
   return (
     <>
