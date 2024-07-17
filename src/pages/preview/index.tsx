@@ -3,6 +3,7 @@ import useModal from '@/hooks/useModal';
 import Pagination from '@/components/Pagination';
 import SideNavigation from '@/components/SideNavigation';
 import Button from '@/components/Button';
+import Dropdown from '@/components/Dropdown';
 
 export const getStaticProps = async () => ({
   props: {
@@ -40,6 +41,21 @@ function Index() {
   };
   // ------------------------------------
 
+
+  // Example Dropdown ------------------------
+  const [selectedCategoryId, setSelectedCategoryId] = useState(0);
+
+  const handleSelectedId = (id: Number) => {
+    setSelectedCategoryId(id);
+  };
+
+  const dropdownLists = [
+    { id: 1, category: 'Category 1', title: 'Option 1' },
+    { id: 2, category: 'Category 2', title: 'Option 2' },
+    { id: 3, category: 'Category 3', title: 'Option 3' },
+  ];
+  // ------------------------------------
+
   return (
     <>
       <Button text='로그인 하기' color='black' />
@@ -56,6 +72,7 @@ function Index() {
       <hr />
       <Button text='confirm 모달 열기' color='white' onClick={handleOpenConfirmModal} />
       <hr />
+      <Dropdown name='exampleDropdown' labelText='Select an Option' lists={dropdownLists} onSelectedId={handleSelectedId} selectedCategoryId={selectedCategoryId} />
     </>
   );
 }
