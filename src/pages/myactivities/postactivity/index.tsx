@@ -1,3 +1,4 @@
+import postActivity from '@/apis/post/postActivity';
 import postActivityImageUrl from '@/apis/post/postActivityImageUrl';
 import Button from '@/components/Button';
 import ImageCard from '@/components/Card/ImageCard';
@@ -9,10 +10,13 @@ import ScheduleListItem from '@/components/ScheduleListItem';
 import { POSTActivitiesReq } from '@/utils/types/myActivities';
 import Image from 'next/image';
 import { FocusEvent, FormEvent, useRef, useState } from 'react';
+import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 // 문화 예술 | 식음료 | 스포츠 | 투어 | 관광 | 웰빙
 type DataName = 'title' | 'category' | 'description' | 'address' | 'price' | 'schedules' | 'bannerImageUrl' | 'subImageUrls';
 export default function PostActivitiy() {
+  const open = useDaumPostcodePopup();
+
   const [postData, setPostData] = useState<POSTActivitiesReq>({
     title: '',
     category: '',
@@ -35,28 +39,41 @@ export default function PostActivitiy() {
 
   const bannerImgRef = useRef<HTMLInputElement>(null);
   const subImgRef = useRef<HTMLInputElement>(null);
+  const addressRef = useRef<HTMLInputElement>(null);
 
   const categories = [
-    { id: -10000, category: '문화 예술' },
-    { id: -20000, category: '식음료' },
-    { id: -30000, category: '스포츠' },
-    { id: -40000, category: '투어' },
-    { id: -50000, category: '관광' },
-    { id: -60000, category: '웰빙' },
+    { id: -10000, category: '문화 예술', title: '문화 예술' },
+    { id: -20000, category: '식음료', title: '식음료' },
+    { id: -30000, category: '스포츠', title: '스포츠' },
+    { id: -40000, category: '투어', title: '투어' },
+    { id: -50000, category: '관광', title: '관광' },
+    { id: -60000, category: '웰빙', title: '웰빙' },
   ];
 
   const DATE_LABEL_STYLE = 'text-[2rem] leading-[2.6rem] text-[#4b4b4b] max-md:text-[1.6rem]';
   const DATE_INPUT_LABEL_STYLE = 'flex flex-col gap-y-[1rem] max-md:gap-y-[0.8rem]';
   const LABEL_STYLE = 'text-[#1b1b1b] text-[2.4rem] font-bold leading-[2.6rem] max-md:text-[2rem]';
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setPostData((prev) => ({ ...prev }));
+    const res = await postActivity(postData);
+    if (!res) return;
+    if (res.status === 201) {
+      alert('체험 등록이 완료되었습니다.');
+    }
   };
 
   const onBlurSetData = (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>, dataName: DataName) => {
     const value = dataName === 'price' ? Number(e.target.value) : e.target.value;
     setPostData((prev) => ({ ...prev, [dataName]: value }));
+  };
+
+  const openAddress = () => {
+    open({
+      onComplete: (data) => {
+        setPostData((prev) => ({ ...prev, address: data.address }));
+      },
+    });
   };
 
   const addSchedule = () => {
@@ -106,7 +123,7 @@ export default function PostActivitiy() {
 
   return (
     <MyLayout>
-      <main className='bg-[#fafafa]'>
+      <main className='bg-[#fafafa] mb-[27rem] max-lg:mb-[40rem] max-md:mb-[13.6rem]'>
         <form onSubmit={handleSubmit}>
           <div className='flex justify-between mb-[2.4rem] '>
             <h2 className='text-[3.2rem] text-[#000] leading-[3.8rem] font-bold'>내 체험 등록</h2>
@@ -140,7 +157,7 @@ export default function PostActivitiy() {
               <label htmlFor='address' className={LABEL_STYLE}>
                 주소
               </label>
-              <Input placeholder='주소' type='text' id='address' />
+              <Input type='text' placeholder='주소를 입력해주세요' id='address' value={postData.address} ref={addressRef} readOnly onClick={openAddress} />
             </div>
             {/* ------예약 가능한 시간대------ */}
             <div className='flex flex-col gap-y-[2.4rem]'>
@@ -168,7 +185,6 @@ export default function PostActivitiy() {
                       type='time'
                       id='startTime'
                       value={schedule.startTime}
-                      max={schedule.endTime}
                       onChange={(e) => {
                         setSchedule((prev) => ({ ...prev, startTime: e.target.value }));
                       }}
@@ -183,7 +199,6 @@ export default function PostActivitiy() {
                       type='time'
                       id='endTime'
                       value={schedule.endTime}
-                      min={schedule.startTime}
                       onChange={(e) => {
                         setSchedule((prev) => ({ ...prev, endTime: e.target.value }));
                       }}
@@ -225,6 +240,7 @@ export default function PostActivitiy() {
                 {!!postData.subImageUrls.length && postData.subImageUrls.map((subImageUrl) => <ImageCard image={subImageUrl} key={subImageUrl} delCard={() => delSubImage(subImageUrl)} />)}
               </div>
             </div>
+            <span className='pl-[0.8rem] text-gray-500 text-[1.8rem] leading-[1.6rem]'>*이미지는 최대 4개까지 등록 가능합니다.</span>
           </div>
         </form>
       </main>
