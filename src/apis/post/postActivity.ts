@@ -1,3 +1,4 @@
+import { POSTActivitiesReq } from '@/utils/types/myActivities';
 import instance from '../axios';
 /* eslint-disable */
 interface ErrorResponse {
@@ -24,7 +25,7 @@ interface ErrorResponse {
  *     console.error('Error creating activity:', error);
  *   });
  */
-const postActivity = async (data: unknown): Promise<any> => {
+const postActivity = async (data: POSTActivitiesReq): Promise<any> => {
   try {
     const res = await instance.post('/activities', data);
     return res;
