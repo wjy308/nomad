@@ -52,7 +52,7 @@ export default forwardRef<HTMLInputElement, DropdownProps>(({ name, labelText, l
   }, [list]);
 
   return (
-    <div className='relative flex flex-col justify-center items-start w-full'>
+    <div className='relative flex flex-col justify-center items-start w-full text-black'>
       <button
         className={`relative w-full p-3.5 bg-white border border-black rounded cursor-pointer flex justify-between items-center ${isToggle ? 'rotate-arrow' : ''}`}
         type='button'
@@ -69,9 +69,9 @@ export default forwardRef<HTMLInputElement, DropdownProps>(({ name, labelText, l
           height={48}
         />
       </button>
-      <ul className={`absolute top-[5.8rem] w-full p-2 bg-white rounded shadow-md ${isToggle ? 'opacity-100 visible' : ''} opacity-0 invisible transition-opacity `}>
+      <ul className={`absolute top-[5rem] w-full p-2 bg-white rounded shadow-md ${isToggle ? 'opacity-100 visible' : 'opacity-0 invisible'} transition-opacity `}>
         {list.map((listItem) => (
-          <li key={`key-${listItem.id}`}>
+          <li key={`key-${listItem.id} h-[4.5rem] `}>
             <button
               type='button'
               className={`w-full p-2 flex items-center gap-2 rounded hover:bg-gray-700 hover:text-white ${listItem.id === selectedList ? 'bg-gray-700 text-white' : ''}`}
