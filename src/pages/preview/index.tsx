@@ -82,7 +82,7 @@ function Index() {
   // Dropdown --------------------------------------------------
   const [selectedCategoryId, setSelectedCategoryId] = useState(0);
 
-  const handleSelectedId = (id: Number) => {
+  const handleSelectedId = (id: number) => {
     setSelectedCategoryId(id);
   };
 
@@ -136,18 +136,11 @@ function Index() {
         </div>
       </div>
 
-	  <div className="p-4">
-      <h1 className="text-xl font-bold mb-4 text-black">Dropdown Example</h1>
-      <Dropdown
-        name="exampleDropdown"
-        lists={dropdownLists}
-        onSelectedId={handleSelectedId}
-        selectedCategoryId={selectedCategoryId}
-      />
-      {selectedCategoryId && (
-        <p className="mt-4">Selected Category ID: {selectedCategoryId}</p>
-      )}
-    </div>
+      <div className='p-4'>
+        <h1 className='text-xl font-bold mb-4 text-black'>Dropdown Example</h1>
+        <Dropdown name='exampleDropdown' lists={dropdownLists} onSelectedId={handleSelectedId} selectedCategoryId={selectedCategoryId} />
+        {selectedCategoryId && <p className='mt-4'>Selected Category ID: {selectedCategoryId}</p>}
+      </div>
     </>
   );
 }
