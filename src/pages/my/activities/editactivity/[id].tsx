@@ -8,6 +8,7 @@ import { DateInput, Input, Textarea } from '@/components/Input';
 import ImageInput from '@/components/Input/ImageInput';
 import MyLayout from '@/components/MyLayout';
 import ScheduleListItem from '@/components/ScheduleListItem';
+import useModal from '@/hooks/useModal';
 import { GetActivityDetail } from '@/utils/types';
 import { PATCHActivityReq } from '@/utils/types/myActivities';
 import Image from 'next/image';
@@ -23,6 +24,7 @@ export default function PostActivitiy() {
   const { id } = router.query;
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const { openModal } = useModal();
 
   const [schedule, setSchedule] = useState<{
     date: string;
@@ -93,7 +95,20 @@ export default function PostActivitiy() {
     const res = await patchActivity(id, patchData);
     if (!res) return;
     if (res.status === 200) {
-      alert('수정이 완료되었습니다.');
+      openModal({
+        modalType: 'alert',
+        content: '수정이 완료되었습니다',
+        btnName: ['확인'],
+        callBackFnc: () => {
+          router.push('/my/activities');
+        },
+      });
+    } else {
+      openModal({
+        modalType: 'alert',
+        content: res.response.data.message,
+        btnName: ['확인'],
+      });
     }
   };
 
@@ -179,7 +194,7 @@ export default function PostActivitiy() {
     <MyLayout>
       <main className='bg-[#fafafa] mb-[27rem] max-lg:mb-[40rem] max-md:mb-[13.6rem]'>
         {isLoaded ? (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className='text-[1.6rem] max-md:text-[1.4rem]'>
             <div className='flex justify-between mb-[2.4rem] '>
               <h2 className='text-[3.2rem] text-[#000] leading-[3.8rem] font-bold'>내 체험 등록</h2>
               <Button type='submit' color='black' cssName='w-[12rem] h-[4.8rem] text-[1.6rem] leading-[2.6rem] rounded-[0.4rem] border-none' text='수정하기' />
