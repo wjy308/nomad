@@ -69,7 +69,7 @@ export default forwardRef<HTMLInputElement, DropdownProps>(({ name, labelText, l
           height={48}
         />
       </button>
-      <ul className={`absolute top-[5.8rem] w-full p-2 bg-white rounded shadow-md ${isToggle ? 'opacity-100 visible' : 'opacity-0 invisible'} transition-opacity `}>
+      <ul className={`absolute top-[5rem] w-full p-2 bg-white rounded shadow-md ${isToggle ? 'opacity-100 visible' : 'opacity-0 invisible'} transition-opacity `}>
         {list.map((listItem) => (
           <li key={`key-${listItem.id} h-[4.5rem] `}>
             <button

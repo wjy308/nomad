@@ -41,11 +41,10 @@ function Index() {
   };
   // ------------------------------------
 
-
   // Example Dropdown ------------------------
   const [selectedCategoryId, setSelectedCategoryId] = useState(0);
 
-  const handleSelectedId = (id: Number) => {
+  const handleSelectedId = (id: number) => {
     setSelectedCategoryId(id);
   };
 
