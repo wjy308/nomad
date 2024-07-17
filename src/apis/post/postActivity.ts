@@ -29,14 +29,8 @@ const postActivity = async (data: POSTActivitiesReq): Promise<any> => {
   try {
     const res = await instance.post('/activities', data);
     return res;
-  } catch (error: unknown) {
-    const err = error as ErrorResponse;
-    if (err.response?.data.message) {
-      // eslint-disable-next-line no-alert
-      return alert(err.response.data.message);
-    }
-    // eslint-disable-next-line no-alert
-    return alert('An unknown error occurred');
+  } catch (error) {
+    return error;
   }
 };
 
