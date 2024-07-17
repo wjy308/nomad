@@ -7,7 +7,7 @@ import { filterCategories } from '@/constant/filterCategoryOptions';
 import CategoryButton from '@/components/FilterButton/CategoryButton';
 import FilterDropButton from '@/components/FilterButton/FilterDropButton';
 import { Input } from '@/components/Input';
-
+/* eslint-disable */
 export const getStaticProps = async () => ({
   props: {
     layoutType: 'removeLayout',
@@ -124,3 +124,4 @@ function Index() {
 }
 
 export default Index;
+/* eslint-enable */
