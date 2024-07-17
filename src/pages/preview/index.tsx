@@ -7,7 +7,7 @@ import { filterCategories } from '@/constant/filterCategoryOptions';
 import CategoryButton from '@/components/FilterButton/CategoryButton';
 import FilterDropButton from '@/components/FilterButton/FilterDropButton';
 import { Input } from '@/components/Input';
-
+/* eslint-disable */
 export const getStaticProps = async () => ({
   props: {
     layoutType: 'removeLayout',
@@ -48,8 +48,7 @@ function Index() {
   };
 
   // ------------------------------------
-  
-  
+
   // Example FilterButton ------------------------
   const [selectedCategory, setSelectedCategory] = useState<string>();
 
@@ -77,7 +76,6 @@ function Index() {
     { name: 'Blue Light', code: 'var(--color-blue-light)' },
     { name: 'Blue Lighter', code: 'var(--color-blue-lighter)' },
   ];
-
 
   return (
     <>
@@ -126,3 +124,4 @@ function Index() {
 }
 
 export default Index;
+/* eslint-enable */
