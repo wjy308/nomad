@@ -1,28 +1,37 @@
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/16/solid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ActivityType {
   id: number;
   title: string;
   category: string;
-  //   onItemSelected: (item: string) => void;
 }
 interface ActivityDropDownProps {
   items: ActivityType[];
+  onItemSelected: (item: ActivityType) => void;
 }
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
-function ActivityDropDown({ items }: ActivityDropDownProps) {
+function ActivityDropDown({ items, onItemSelected }: ActivityDropDownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
+
+  // useEffect를 사용하여 초기 선택 항목 설정
+  useEffect(() => {
+    if (items.length > 0) {
+      setSelectedItem(items[0].title); // 첫 번째 아이템의 title로 초기화
+      onItemSelected(items[0]); // 선택된 항목 부모로 전달
+    }
+  }, [items]); // items가 변경될 때마다 실행
 
   const handleButtonClick = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleItemClick = (item: string) => {
-    setSelectedItem(item);
+  const handleItemClick = (item: ActivityType) => {
+    setSelectedItem(item.title);
     setIsOpen(false);
+    onItemSelected(item); // 선택된 항목 부모로 전달
   };
 
   return (
@@ -36,7 +45,7 @@ function ActivityDropDown({ items }: ActivityDropDownProps) {
         <div className='absolute flex flex-row w-[2.4rem] h-[2.4rem] text-[black] right-[1rem] bottom-[1.5rem]' /* onClick={handleClickDropDown} */>
           {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
         </div>
-        {selectedItem || '선택'}
+        {selectedItem}
       </button>
       {isOpen && (
         <div className='absolute mt-[5.6rem] border-[black] border-[0.1rem] w-full rounded-md bg-white shadow-lg z-10 text-[black]'>
@@ -46,7 +55,7 @@ function ActivityDropDown({ items }: ActivityDropDownProps) {
               <li
                 key={item.id}
                 className='h-[5.6rem] flex items-center text-[1.6rem] cursor-pointer border-b select-none relative py-[0.5rem] pl-[1.75rem] pr-[2.25rem] hover:bg-gray-100'
-                onClick={() => handleItemClick(item.title)}
+                onClick={() => handleItemClick(item)}
               >
                 {item.title}
               </li>

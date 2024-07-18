@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* 캘린더 제작중, PR을 위해 임시로 린트 에러 막아놓았음 */
@@ -7,6 +8,8 @@ import isoWeek from 'dayjs/plugin/isoWeek';
 import 'dayjs/locale/ko';
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from '@heroicons/react/16/solid';
 import BookedBox from '@/components/BookedBox';
+import getReservationDashBoard from '@/apis/get/getReservationDashboard';
+import { useQuery } from '@tanstack/react-query';
 
 dayjs.extend(isoWeek);
 dayjs.locale('ko');
@@ -16,18 +19,41 @@ type Reservation = {
   date: string;
   status: Status;
 };
-const reservations: Reservation[] = [
-  { date: '2024-07-20', status: '예약' },
-  { date: '2024-07-15', status: '완료' },
-  { date: '2024-07-25', status: '승인' },
-  { date: '2024-07-25', status: '예약' },
-  // 추가 예약 데이터
-];
+type ReservationData = {
+  date: string;
+  reservations: {
+    completed: number;
+    confirmed: number;
+    pending: number;
+  };
+};
 
-function calendar2() {
-  // PR을 위해 임시로 막음
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+interface ActivityType {
+  id: number;
+  title: string;
+  category: string;
+}
+interface ActivityDropDownProps {
+  items: ActivityType[];
+  selectedActivityId: number | null;
+}
+
+function calendar2({ selectedActivityId }: ActivityDropDownProps) {
   const [currentMonth, setCurrentMonth] = useState(dayjs());
+  const year = currentMonth.format('YYYY');
+  const month = currentMonth.format('MM');
+
+  const { data } = useQuery({
+    queryKey: ['reservations', selectedActivityId, year, month],
+    queryFn: () => {
+      if (selectedActivityId) {
+        return getReservationDashBoard(selectedActivityId, year, month);
+      }
+      // selectedActivityId가 없을 경우 기본값 또는 빈 데이터를 반환하거나, 필요에 따라 처리
+      return Promise.resolve([]);
+    },
+    enabled: !!selectedActivityId, // selectedActivityId가 존재할 때만 쿼리 실행
+  });
 
   // startOf('month') 메서드는 currentMonth를 해당 월의 첫째 날로 설정,
   // startOf('week') 메서드는 그 날이 속한 주의 첫째 날로 설정.
@@ -53,8 +79,18 @@ function calendar2() {
     setCurrentMonth(currentMonth.add(1, 'month'));
   };
 
-  // 임시 코드
-  const getReservationsForDay = (date: string) => reservations.filter((reservation) => dayjs(reservation.date).isSame(date, 'day'));
+  const getReservationsForDay = (date: string) => {
+    if (!data) return [];
+    const dayData = data.find((d: ReservationData) => d.date === date);
+    if (!dayData) return [];
+
+    const reservations: Reservation[] = [];
+    if (dayData.reservations.completed > 0) reservations.push({ date, status: '완료' });
+    if (dayData.reservations.confirmed > 0) reservations.push({ date, status: '승인' });
+    if (dayData.reservations.pending > 0) reservations.push({ date, status: '예약' });
+
+    return reservations;
+  };
 
   return (
     <div className='text-[#000] my-[1.6rem]'>

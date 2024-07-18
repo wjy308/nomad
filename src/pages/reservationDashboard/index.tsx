@@ -10,6 +10,7 @@ interface ActivityType {
 }
 function Index() {
   const [activityLists, setActivityLists] = useState<ActivityType[]>([]);
+  const [selectedActivityId, setSelectedActivityId] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -31,13 +32,17 @@ function Index() {
     getMyAct();
   }, []);
 
+  const handleActivitySelected = (selectedItem: ActivityType) => {
+    setSelectedActivityId(selectedItem.id);
+  };
+
   return (
     <div className='flex py-[1.6rem] px-[1.6rem] flex-col'>
       <h1 className='text-[#000] text-[3.2rem] font-[700] mb-[4.2rem]'>예약 현황</h1>
       {error && <p className='text-red-500'>{error}</p>}
-      <ActivityDropDown items={activityLists} />
+      <ActivityDropDown items={activityLists} onItemSelected={handleActivitySelected} />
       <div className='container mx-auto p-4'>
-        <Calendar2 />
+        <Calendar2 items={activityLists} selectedActivityId={selectedActivityId} />
       </div>
     </div>
   );
