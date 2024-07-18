@@ -1,6 +1,6 @@
 import Dropdown from '@/components/Dropdown';
 import getMyActivities from '@/apis/get/getMyActivities';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Calendar2 from './calendar';
 
 function Index() {
@@ -10,8 +10,10 @@ function Index() {
     async function getMyAct() {
       try {
         const data = await getMyActivities({ size: 6 });
+        // eslint-disable-next-line no-console
         console.log(data);
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.error('err');
       }
     }
