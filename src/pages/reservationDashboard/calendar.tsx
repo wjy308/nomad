@@ -58,7 +58,7 @@ function calendar2() {
 
   return (
     <div className='text-[#000] my-[1.6rem]'>
-      <div className='flex flex-row items-center justify-between'>
+      <div className='flex flex-row items-center mb-[2.3rem] justify-between'>
         <button className='flex flex-row w-[2.4rem] h-[2.4rem]' type='button' onClick={prevMonth}>
           <ChevronDoubleLeftIcon />
         </button>
@@ -67,17 +67,22 @@ function calendar2() {
           <ChevronDoubleRightIcon />
         </button>
       </div>
-      <div className='grid grid-cols-7 gap-[0.3rem]'>
+      <div className='grid grid-cols-7 '>
+        {['일', '월', '화', '수', '목', '금', '토'].map((dayOfweek) => (
+          <div key={dayOfweek} className='flex justify-center items-center h-[3rem] font-bold border-[0.1rem] border-[#e8e8e8]'>
+            {dayOfweek}
+          </div>
+        ))}
         {days.map((day) => {
           const reservationsForDay = getReservationsForDay(day.format('YYYY-MM-DD'));
           return (
             <button
               type='button'
               key={day.format('YYYY-MM-DD')}
-              className={`flex w-1/7 h-[8.4rem] p-[0.3rem] border flex-col ${day.isSame(currentMonth, 'month') ? '' : 'bg-gray-100'}  hover:border-blue hover:border-[0.3rem]`}
+              className={`flex w-1/7 h-[8.4rem] p-[0.3rem] border-[#e8e8e8] border flex-col ${day.isSame(currentMonth, 'month') ? '' : 'bg-gray-50'} ${day.isSame(dayjs(), 'day') ? 'border-blue border-[0.2rem]' : ''}  hover:border-blue hover:border-[0.3rem]`}
             >
               <div className='text-left w-[100%]'>
-                <span className={`${day.isSame(dayjs(), 'day') ? 'flex w-[1.5rem] justify-center rounded-[0.2rem] text-white bg-blue-light' : ''}`}>{day.date()}</span>
+                <span className=''>{day.date()}</span>
               </div>
               <BookedBox reservations={reservationsForDay} />
             </button>
