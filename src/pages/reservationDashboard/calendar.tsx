@@ -8,7 +8,7 @@ import isoWeek from 'dayjs/plugin/isoWeek';
 import 'dayjs/locale/ko';
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from '@heroicons/react/16/solid';
 import BookedBox from '@/components/BookedBox';
-import getReservationDashBoard from '@/apis/get/getReservationDashboard';
+import getReservationDashBoard from '@/apis/get/getReservationDashBoard';
 import { useQuery } from '@tanstack/react-query';
 
 dayjs.extend(isoWeek);
