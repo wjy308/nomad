@@ -80,6 +80,7 @@ export default function PostActivitiy() {
   const DATE_LABEL_STYLE = 'text-[2rem] leading-[2.6rem] text-[#4b4b4b] max-md:text-[1.6rem]';
   const DATE_INPUT_LABEL_STYLE = 'flex flex-col gap-y-[1rem] max-md:gap-y-[0.8rem]';
   const LABEL_STYLE = 'text-[#1b1b1b] text-[2.4rem] font-bold leading-[2.6rem] max-md:text-[2rem]';
+  const INPUT_STYLE = 'h-[5.6rem] leading-[2.6rem] py-[0.8rem] px-[1.6rem]';
 
   const getInitData = useCallback(async () => {
     if (!id || typeof id === 'object') return;
@@ -201,7 +202,7 @@ export default function PostActivitiy() {
             </div>
             <div className='flex flex-col gap-y-[2.4rem]'>
               {/* ------제목------ */}
-              <Input placeholder='제목' type='text' id='title' onBlur={(e) => onBlurSetData(e, 'title')} defaultValue={initData.title} />
+              <Input placeholder='제목' type='text' id='title' onBlur={(e) => onBlurSetData(e, 'title')} defaultValue={initData.title} cssName={INPUT_STYLE} />
               {/* ------카테고리------ */}
               <Dropdown
                 lists={categories}
@@ -220,14 +221,24 @@ export default function PostActivitiy() {
                 <label htmlFor='price' className={LABEL_STYLE}>
                   가격
                 </label>
-                <Input placeholder='가격' type='text' id='price' onBlur={(e) => onBlurSetData(e, 'price')} defaultValue={initData.price} />
+                <Input placeholder='가격' type='text' id='price' onBlur={(e) => onBlurSetData(e, 'price')} defaultValue={initData.price} cssName={INPUT_STYLE} />
               </div>
               {/* -----주소----- */}
               <div className='flex flex-col gap-y-[1.6rem]'>
                 <label htmlFor='address' className={LABEL_STYLE}>
                   주소
                 </label>
-                <Input type='text' placeholder='주소를 입력해주세요' id='address' value={patchData.address} ref={addressRef} readOnly onClick={openAddress} defaultValue={initData.address} />
+                <Input
+                  type='text'
+                  placeholder='주소를 입력해주세요'
+                  id='address'
+                  value={patchData.address}
+                  ref={addressRef}
+                  readOnly
+                  onClick={openAddress}
+                  defaultValue={initData.address}
+                  cssName={INPUT_STYLE}
+                />
               </div>
               {/* ------예약 가능한 시간대------ */}
               <div className='flex flex-col gap-y-[2.4rem]'>
@@ -241,6 +252,7 @@ export default function PostActivitiy() {
                       <DateInput
                         name='날짜'
                         id='date'
+                        cssName='h-[5.6rem] px-[1.6rem] max-md:h-[4.4rem]'
                         onPostDataValue={(date) => {
                           setSchedule((prev) => ({ ...prev, date }));
                         }}
@@ -254,6 +266,7 @@ export default function PostActivitiy() {
                         type='time'
                         id='startTime'
                         value={schedule.startTime}
+                        cssName='h-[5.6rem] px-[1.6rem] max-md:h-[4.4rem]'
                         onChange={(e) => {
                           setSchedule((prev) => ({ ...prev, startTime: e.target.value }));
                         }}
@@ -268,6 +281,7 @@ export default function PostActivitiy() {
                         type='time'
                         id='endTime'
                         value={schedule.endTime}
+                        cssName='h-[5.6rem] px-[1.6rem] max-md:h-[4.4rem]'
                         onChange={(e) => {
                           setSchedule((prev) => ({ ...prev, endTime: e.target.value }));
                         }}
