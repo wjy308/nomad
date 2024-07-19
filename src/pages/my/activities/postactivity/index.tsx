@@ -12,7 +12,7 @@ import useModal from '@/hooks/useModal';
 import { POSTActivitiesReq } from '@/utils/types/myActivities';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { FocusEvent, FormEvent, useRef, useState } from 'react';
+import { FocusEvent, FormEvent, KeyboardEvent, useRef, useState } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 // 문화 예술 | 식음료 | 스포츠 | 투어 | 관광 | 웰빙
@@ -98,6 +98,18 @@ export default function PostActivitiy() {
     setPostData((prev) => ({ ...prev, [dataName]: value }));
   };
 
+  const noEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+    }
+  };
+
+  const numberOnly = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key.match(/[^0-9]/g)) {
+      e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '');
+    }
+  };
+
   const openAddress = () => {
     open({
       onComplete: (data) => {
@@ -162,7 +174,7 @@ export default function PostActivitiy() {
             </div>
             <div className='flex flex-col gap-y-[2.4rem]'>
               {/* ------제목------ */}
-              <Input placeholder='제목' type='text' id='title' onBlur={(e) => onBlurSetData(e, 'title')} cssName={INPUT_STYLE} />
+              <Input placeholder='제목' type='text' id='title' onBlur={(e) => onBlurSetData(e, 'title')} cssName={INPUT_STYLE} onKeyDown={noEnter} onKeyUp={noEnter} />
               {/* ------카테고리------ */}
               <Dropdown
                 lists={categories}
@@ -182,7 +194,7 @@ export default function PostActivitiy() {
                 <label htmlFor='price' className={LABEL_STYLE}>
                   가격
                 </label>
-                <Input placeholder='가격' type='text' id='price' onBlur={(e) => onBlurSetData(e, 'price')} cssName={INPUT_STYLE} />
+                <Input placeholder='가격' type='text' id='price' onBlur={(e) => onBlurSetData(e, 'price')} cssName={INPUT_STYLE} onKeyDown={numberOnly} onKeyUp={numberOnly} />
               </div>
               {/* -----주소----- */}
               <div className='flex flex-col gap-y-[1.6rem]'>
