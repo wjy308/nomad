@@ -2,6 +2,7 @@ import deleteActivity from '@/apis/delete/deleteActivity';
 import getMyActivities from '@/apis/get/getMyActivities';
 import AcitivitiesCardList from '@/components/CardList/AcitivitiesCardList';
 import MyLayout from '@/components/MyLayout';
+import useModal from '@/hooks/useModal';
 import { Activity } from '@/utils/types/myActivities';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
@@ -11,6 +12,8 @@ export default function MyActivities() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [cursorId, setCursorId] = useState<number | null>();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isDone, setIsDone] = useState<boolean>(true);
+  const { openModal } = useModal();
   const { ref, inView } = useInView({
     threshold: 0,
   });
@@ -26,11 +29,13 @@ export default function MyActivities() {
 
   const getAddtionalCardsData = useCallback(async () => {
     if (!cursorId || !isLoaded) return;
+    setIsDone(false);
     const data = await getMyActivities({ cursorId, size: 3 });
     if (data) {
       setActivities((prev) => [...prev, ...data.activities]);
       setCursorId(data.cursorId);
     }
+    setTimeout(() => setIsDone(true), 1000);
   }, [cursorId, isLoaded]);
 
   const delActivity = async (activitiyId: number) => {
@@ -41,7 +46,11 @@ export default function MyActivities() {
       const updatedActivities = activities.filter((activitiy) => activitiy.id !== activitiyId);
       setActivities(() => updatedActivities);
     } else {
-      alert(response);
+      openModal({
+        modalType: 'alert',
+        content: '체험 삭제에 실패했습니다.',
+        btnName: ['확인'],
+      });
       // 임시, 실패할 경우 모달을 띄워 알려줄 예정
     }
   };
@@ -51,10 +60,10 @@ export default function MyActivities() {
   }, [getCardsData]);
 
   useEffect(() => {
-    if (inView) {
+    if (inView && isDone) {
       getAddtionalCardsData();
     }
-  }, [getAddtionalCardsData, inView]);
+  }, [getAddtionalCardsData, inView, isDone]);
 
   return (
     <MyLayout>
