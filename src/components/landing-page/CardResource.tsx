@@ -44,7 +44,7 @@ export default function CardResource({ activitiesData, banner }: CardResourcePro
             ? 'absolute inset-0 z-[-1] md:w-[38.4rem] md:h-[38.4rem] w-[18.6rem] h-[18.6rem]'
             : 'relative lg:w-[28.3rem] lg:h-[28.3rem] md:w-[22.1rem] md:h-[22.1rem] w-[16.8rem] h-[16.8rem] rounded-[1.6rem]'
         } 
-	   overflow-hidden md:w-full md:pt-full md:h-auto `}
+	   overflow-hidden md:w-full md:pt-full`}
       >
         <Image
           src={activitiesData.bannerImageUrl}
