@@ -64,7 +64,7 @@ export default function PopularActivitiesList({ popularActivities }: PopularActi
       <div className='flex items-start justify-start w-full overflow-hidden md:overflow-auto md:scroll-smooth md:webkit-overflow-scrolling-touch md:[&::-webkit-scrollbar]:hidden'>
         <ul className='flex items-start justify-start gap-4' ref={ref}>
           {popularActivities?.map((popularActivity) => (
-            <li key={popularActivity.id} className='inline-block whitespace-normal'>
+            <li key={popularActivity.id} className='inline-block whitespace-normal rounded-[2.4rem] overflow-hidden'>
               <CardResource activitiesData={popularActivity} banner />
             </li>
           ))}
