@@ -21,11 +21,13 @@ function Review({ closeModal, reservationInfo }: any) {
               <Image fill alt='체험 이미지' src={reservationInfo.activity.bannerImageUrl} />
             </div>
             <div className='flex flex-col gap-[1.2rem]'>
-              <span className='text-[2rem] font-[700] leading-[2.6rem]'>함께 배우면 즐거운 스트릿 댄스</span>
-              <span className='text-[1.8rem] font-[400] leading-[2.4rem]'>2023. 2. 14 · 11:00 - 12:30 · 10명</span>
+              <span className='text-[2rem] font-[700] leading-[2.6rem]'>{reservationInfo.activity.title}</span>
+              <span className='text-[1.8rem] font-[400] leading-[2.4rem]'>
+                {reservationInfo.date} · {reservationInfo.startTime} - {reservationInfo.endTime} · {reservationInfo.headCount}명
+              </span>
               <span className='text-[3.2rem] leading-[3.819rem] font-[700] pt-[1.2rem] border-t border-opacity-10'>
                 {'\uFFE6'}
-                {'10000'.toLocaleString()}
+                {reservationInfo.totalPrice.toLocaleString()}
               </span>
             </div>
           </div>

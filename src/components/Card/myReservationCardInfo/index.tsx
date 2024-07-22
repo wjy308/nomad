@@ -35,7 +35,10 @@ export default function MyReservationCardInfo({ data, refreshReservationList }: 
           {date} · {startTime} - {endTime} · {headCount}명
         </span>
         <div className='flex justify-between mt-[1.6rem]'>
-          <span className='text-[2.4rem] text-[#1b1b1b] leading-[2.864rem] font-[500]'>₩{totalPrice.toLocaleString('ko-KR')}</span>
+          <span className='text-[2.4rem] text-[#1b1b1b] leading-[2.864rem] font-[500]'>
+            {'\uFFE6'}
+            {totalPrice.toLocaleString('ko-KR')}
+          </span>
           {statusInfo.name === '예약 완료' && <Button text='예약 취소' color='white' cssName={btnCss} onClick={handleCancelReservation} />}
           {statusInfo.name === '체험 완료' && <Button text='후기 작성' color='black' cssName={btnCss} onClick={handleOpenReview} />}
         </div>

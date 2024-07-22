@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import postMyReview from '@/apis/post/postMyReview';
 
 import Button from '@/components/Button';
@@ -15,8 +15,11 @@ interface Props {
   onClickCloseModal: () => void;
 }
 
+// 1.리뷰 리스트 리액트쿼리 마이그레이션
+// 2.후기 작성하면 더이상 못하게 막아야 됨
+
 export default function ReviewForm({ id, onClickCloseModal }: Props) {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const { control, handleSubmit, setValue, register } = useForm<FormData>({
     defaultValues: { rating: 0, content: '' },
   });
@@ -25,7 +28,7 @@ export default function ReviewForm({ id, onClickCloseModal }: Props) {
     mutationFn: (data: FormData) => postMyReview(id, data),
     onSuccess: () => {
       onClickCloseModal();
-      queryClient.invalidateQueries({ queryKey: ['MyReservations'] });
+      // queryClient.invalidateQueries({ queryKey: ['MyReservations'] });
     },
   });
 
@@ -41,7 +44,7 @@ export default function ReviewForm({ id, onClickCloseModal }: Props) {
         className='text-[1.6rem] border border-gray-400 w-full min-h-[22.4rem] resize-none p-2 px-4 rounded-md'
         placeholder='후기를 작성해주세요'
       />
-      <Button color='black' text='작성하기' cssName='py-[1.5rem] text-[1.6rem] leading-[2.6rem] font-[700]' />
+      <Button type='submit' color='black' text='작성하기' cssName='py-[1.5rem] text-[1.6rem] leading-[2.6rem] font-[700]' />
     </form>
   );
 }
