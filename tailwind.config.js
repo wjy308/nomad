@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         'var-modal-bg': 'rgba(0, 0, 0, 0.8)',
         'footer-bg': '#112211',
+
         black: 'var(--color-black)',
         'nomad-black': 'var(--color-nomad-black)',
         gray: {
