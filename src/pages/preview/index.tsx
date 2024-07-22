@@ -141,6 +141,8 @@ function Index() {
         <Dropdown name='exampleDropdown' lists={dropdownLists} onSelectedId={handleSelectedId} selectedCategoryId={selectedCategoryId} />
         {selectedCategoryId && <p className='mt-4'>Selected Category ID: {selectedCategoryId}</p>}
       </div>
+
+      <hr />
     </>
   );
 }

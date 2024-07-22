@@ -5,6 +5,7 @@ import ImageCard from '@/components/Card/ImageCard';
 import Dropdown from '@/components/Dropdown';
 import { DateInput, Input, Textarea } from '@/components/Input';
 import ImageInput from '@/components/Input/ImageInput';
+import TimeInput from '@/components/Input/TimeInput';
 import MyLayout from '@/components/MyLayout';
 import ScheduleListItem from '@/components/ScheduleListItem';
 import useModal from '@/hooks/useModal';
@@ -119,6 +120,11 @@ export default function PostActivitiy() {
 
   const addSchedule = () => {
     setPostData((prev) => ({ ...prev, schedules: [...prev.schedules, schedule] }));
+    setSchedule((prev) => ({
+      ...prev,
+      startTime: '',
+      endTime: '',
+    }));
   };
 
   const delSchedule = (targetSchedule: { date: string; startTime: string; endTime: string }) => {
@@ -224,11 +230,10 @@ export default function PostActivitiy() {
                     <label htmlFor='startTime' className={DATE_LABEL_STYLE}>
                       시작 시간
                     </label>
-                    <Input
-                      type='time'
+                    <TimeInput
                       id='startTime'
                       value={schedule.startTime}
-                      cssName='h-[5.6rem] px-[1.6rem] max-md:h-[4.4rem]'
+                      cssName='h-[5.6rem] max-md:h-[4.4rem] max-md:text-[1.4rem]'
                       onChange={(e) => {
                         setSchedule((prev) => ({ ...prev, startTime: e.target.value }));
                       }}
@@ -239,11 +244,10 @@ export default function PostActivitiy() {
                     <label htmlFor='endTime' className={DATE_LABEL_STYLE}>
                       종료 시간
                     </label>
-                    <Input
-                      type='time'
+                    <TimeInput
                       id='endTime'
                       value={schedule.endTime}
-                      cssName='h-[5.6rem] px-[1.6rem] max-md:h-[4.4rem]'
+                      cssName='h-[5.6rem] max-md:h-[4.4rem] max-md:text-[1.4rem]'
                       onChange={(e) => {
                         setSchedule((prev) => ({ ...prev, endTime: e.target.value }));
                       }}
