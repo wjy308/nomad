@@ -1,8 +1,10 @@
-export default function setReservationStatueInfo(status: 'pending' | 'confirmed' | 'declined' | 'canceled' | 'completed') {
+import { StatusFilter } from '@/types/StatusFilter';
+
+export default function setReservationStatueInfo(status: StatusFilter) {
   switch (status) {
     case 'pending':
       return {
-        name: '예약 완료',
+        name: '예약 신청',
         btnColor: 'text-[#2EB4FF]',
       };
     case 'canceled':

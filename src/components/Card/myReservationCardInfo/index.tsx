@@ -5,7 +5,15 @@ import { IReservationCardInfo } from '@/types/ReservationInfo';
 import setReservationStatueInfo from '@/utils/setReservationStatueInfo';
 import { useState } from 'react';
 
-export default function MyReservationCardInfo({ data, refreshReservationList }: { data: IReservationCardInfo; refreshReservationList: () => void }) {
+export default function MyReservationCardInfo({
+  data,
+  currentFilterOption,
+  refreshReservationList,
+}: {
+  data: IReservationCardInfo;
+  currentFilterOption: string | undefined;
+  refreshReservationList: (filterOption: string | undefined) => Promise<void>;
+}) {
   const { activity, status, totalPrice, date, startTime, endTime, headCount } = data;
   const statusInfo = setReservationStatueInfo(status);
   const btnCss = 'w-[12.1rem] h-[4rem] text-[1.4rem]';
@@ -22,7 +30,7 @@ export default function MyReservationCardInfo({ data, refreshReservationList }: 
   const handleCancelReservation = async () => {
     const result = await patchCancelMyReservation(data.id);
     if (result) {
-      refreshReservationList();
+      refreshReservationList(currentFilterOption);
     }
   };
 
