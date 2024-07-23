@@ -47,7 +47,7 @@ export default function MyReservationCardInfo({
             {'\uFFE6'}
             {totalPrice.toLocaleString('ko-KR')}
           </span>
-          {statusInfo.name === '예약 완료' && <Button text='예약 취소' color='white' cssName={btnCss} onClick={handleCancelReservation} />}
+          {statusInfo.name === '예약 신청' && <Button text='예약 취소' color='white' cssName={btnCss} onClick={handleCancelReservation} />}
           {statusInfo.name === '체험 완료' && <Button text='후기 작성' color='black' cssName={btnCss} onClick={handleOpenReview} />}
         </div>
       </div>
