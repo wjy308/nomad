@@ -229,10 +229,9 @@ export default function PostActivitiy() {
     <MyLayout>
       <main className='bg-gray-10 mb-[27rem] max-lg:mb-[40rem] max-md:mb-[13.6rem]'>
         {isLoaded ? (
-          <form onSubmit={() => false} className='text-[1.6rem] max-md:text-[1.4rem]'>
+          <form onSubmit={() => false} className='relative text-[1.6rem] max-md:text-[1.4rem]'>
             <div className='flex justify-between mb-[2.4rem] '>
               <h2 className='text-[3.2rem] text-[#000] leading-[3.8rem] font-bold'>내 체험 등록</h2>
-              <Button type='button' onClick={handleSubmit} color='black' cssName='w-[12rem] h-[4.8rem] text-[1.6rem] leading-[2.6rem] rounded-[0.4rem] border-none' text='수정하기' />
             </div>
             <div className='flex flex-col gap-y-[2.4rem]'>
               {/* ------제목------ */}
@@ -259,13 +258,14 @@ export default function PostActivitiy() {
                 </label>
                 <Input
                   placeholder='가격'
-                  type='text'
+                  type='number'
                   id='price'
                   onBlur={(e) => onBlurSetData(e, 'price')}
                   defaultValue={initData.price}
-                  cssName={INPUT_STYLE}
+                  cssName={`${INPUT_STYLE} [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                   onKeyUp={numberOnly}
                   onKeyDown={numberOnly}
+                  autoComplete='off'
                 />
               </div>
               {/* -----주소----- */}
@@ -273,17 +273,19 @@ export default function PostActivitiy() {
                 <label htmlFor='address' className={LABEL_STYLE}>
                   주소
                 </label>
-                <Input
-                  type='text'
-                  placeholder='주소를 입력해주세요'
-                  id='address'
-                  value={patchData.address}
-                  ref={addressRef}
-                  readOnly
-                  onClick={openAddress}
-                  defaultValue={initData.address}
-                  cssName={INPUT_STYLE}
-                />
+                <button type='button' onClick={openAddress}>
+                  <Input
+                    type='text'
+                    placeholder='주소를 입력해주세요'
+                    id='address'
+                    tabIndex={-1}
+                    value={patchData.address}
+                    ref={addressRef}
+                    readOnly
+                    defaultValue={initData.address}
+                    cssName={INPUT_STYLE}
+                  />
+                </button>
               </div>
               {/* ------예약 가능한 시간대------ */}
               <div className='flex flex-col gap-y-[2.4rem]'>
@@ -368,6 +370,13 @@ export default function PostActivitiy() {
               </div>
               <span className='pl-[0.8rem] text-gray-500 text-[1.8rem] leading-[1.6rem]'>*이미지는 최대 4개까지 등록 가능합니다.</span>
             </div>
+            <Button
+              type='button'
+              onClick={handleSubmit}
+              color='black'
+              cssName='absolute top-0 right-0 w-[12rem] h-[4.8rem] text-[1.6rem] leading-[2.6rem] rounded-[0.4rem] border-none focus:bg-gray-200'
+              text='수정하기'
+            />
           </form>
         ) : (
           '로딩중'
