@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/no-shadow */
-/* 캘린더 제작중, PR을 위해 임시로 린트 에러 막아놓았음 */
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import isoWeek from 'dayjs/plugin/isoWeek';
@@ -108,8 +107,21 @@ function calendar2({ selectedActivityId }: ActivityDropDownProps) {
     setSeletedDate(day);
   };
 
+  const handleClose = () => {
+    setIsCalendarClick(false);
+  };
+
   return (
-    <div className='text-[#000] my-[1.6rem]'>
+    <div className='text-[#000] my-[1.6rem] relative'>
+      {isCalendarClick && selectedDate && (
+        <div
+          className={`fixed top-0 w-full h-full bg-white z-20 transition-transform transform ${
+            isCalendarClick ? 'translate-x-0  z-50' : '-translate-x-full'
+          } md:absolute md:w-[42.9rem] md:h-[69.7rem] md:bg-white right-0 md:transform-none border border-[#DDDDDD] shadow-[0_0.4rem_1.6rem_0_rgba(17,34,17,0.05)] rounded-[1.2rem] `}
+        >
+          <ReservationInfo date={selectedDate} activityId={selectedActivityId} onClose={handleClose} />
+        </div>
+      )}
       <div className='flex flex-row items-center mb-[2.3rem] justify-between'>
         <button className='flex flex-row w-[2.4rem] h-[2.4rem]' type='button' onClick={prevMonth}>
           <ChevronDoubleLeftIcon />
@@ -142,7 +154,6 @@ function calendar2({ selectedActivityId }: ActivityDropDownProps) {
           );
         })}
       </div>
-      {isCalendarClick && selectedDate && <ReservationInfo date={selectedDate} activityId={selectedActivityId} />}
     </div>
   );
 }

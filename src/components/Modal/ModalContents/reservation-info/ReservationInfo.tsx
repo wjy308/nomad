@@ -9,6 +9,7 @@ import { queryKey } from '@/apis/queryKey';
 import PropTypes from 'prop-types';
 import ReservationCard from './ReservationCard';
 import ActivityDropDown, { ActivityType } from '@/pages/reservationdashboard/ActivityDropDown';
+import IconX from 'public/icons/Icon_X_bold.svg';
 
 interface ReservationSchedule {
   count: { pending: number; confirmed: number; declined: number };
@@ -20,17 +21,19 @@ interface ReservationSchedule {
 interface Props {
   date: string;
   activityId: number;
+  onClose: () => void;
 }
 
 const STATUSES = ['신청', '확정', '거절'];
 
-export default function ReservationInfo({ date, activityId }: Props) {
+export default function ReservationInfo({ date, activityId, onClose }: Props) {
   const queryClient = useQueryClient();
   const [selectedStatus, setSelectedStatus] = useState<ReservationCardType['status']>('pending');
   const [scheduledId, setScheduledId] = useState<number>(0);
   const [schedule, setSchedule] = useState(); // eslint-disable-line @typescript-eslint/no-shadow
   const observerRef = useRef<HTMLDivElement>(null);
   const [filteredDropdownList, setFilteredDropdownList] = useState<{ id: number; title: string }[]>([]); // 필터링된 드롭박스 리스트 상태 추가
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const { data: reservedScheduleData } = useQuery({
     queryKey: queryKey.getMyReservationUseDate(date),
@@ -102,9 +105,25 @@ export default function ReservationInfo({ date, activityId }: Props) {
     queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(scheduledId, newSelectedStatus) });
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [onClose]);
+
   return (
-    <>
-      <h1 className='text-[2.8rem] font-bold text-black leading-[2.6rem] mt-4 mb-[-1rem]'>예약 정보</h1>
+    <div ref={containerRef} className='p-[2rem]'>
+      <div className='flex flex-row justify-between'>
+        <h1 className='text-[2.8rem] font-bold text-black leading-[2.6rem]'>예약 정보</h1>
+        <button className='w-[2rem] h-[2rem]' style={{ backgroundImage: `url(${IconX.src})` }} onClick={onClose} />
+      </div>
       <ul className='flex items-start text-[2rem] font-normal text-gray-600 gap-[1.2rem] mt-[3.4rem] leading-[2.6rem] border-b border-gray-300'>
         {STATUSES.map((status) => (
           <button
@@ -151,33 +170,13 @@ export default function ReservationInfo({ date, activityId }: Props) {
                 />
               ))
             ) : (
-              <li className='flex flex-col justify-between items-stretch border rounded-md border-gray-300 p-[1.6rem] w-[38.2rem] h-[11.6rem] text-[1.8rem] font-medium text-gray-600'>
+              <li className='flex flex-col justify-between items-stretch border rounded-md border-gray-300 p-[1.6rem] w-full h-[11.6rem] text-[1.8rem] font-medium text-gray-600'>
                 예약 내역이 없습니다
               </li>
             )}
           </ul>
         </div>
       </article>
-      {/* {reservedScheduleData?.length !== 0 && (
-        <div className='flex items-center justify-between fixed w-[88%] bottom-[2rem] p-[1rem] pb-0 bg-white'>
-          <h2 className='text-[2.8rem] font-semibold text-black'>예약 현황</h2>
-          <h2 className='text-[2.8rem] font-semibold text-black'>{reservedScheduleData?.length}</h2>
-        </div>
-      )} */}
-    </>
+    </div>
   );
 }
-
-// eslint-disable-next-line react/require-default-props
-// ReservationInfo.defaultProps = {
-//   date: '2024-03-20',
-//   activityId: 178,
-//   onClickCloseModal: () => {},
-// };
-
-ReservationInfo.propTypes = {
-  date: PropTypes.string,
-  activityId: PropTypes.number,
-  onClickCloseModal: PropTypes.func,
-};
-/* eslint-enable */

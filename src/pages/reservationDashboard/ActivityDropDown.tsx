@@ -1,5 +1,5 @@
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/16/solid';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export interface ActivityType {
   id: number;
@@ -16,6 +16,7 @@ interface ActivityDropDownProps {
 function ActivityDropDown({ items, onItemSelected, labelText }: ActivityDropDownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // useEffect를 사용하여 초기 선택 항목 설정
   useEffect(() => {
@@ -24,6 +25,19 @@ function ActivityDropDown({ items, onItemSelected, labelText }: ActivityDropDown
       onItemSelected(items[0]); // 선택된 항목 부모로 전달
     }
   }, [items]); // items가 변경될 때마다 실행
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleButtonClick = () => {
     setIsOpen(!isOpen);
@@ -36,7 +50,7 @@ function ActivityDropDown({ items, onItemSelected, labelText }: ActivityDropDown
   };
 
   return (
-    <div className='flex flex-col relative'>
+    <div className='flex flex-col relative' ref={dropdownRef}>
       {labelText && <label className='absolute top-[-0.65rem] pl-[0.5rem] pr-[0.5rem] left-[1rem] bg-[white] text-[black] z-10'>{labelText}</label>}
       <button
         type='button'
