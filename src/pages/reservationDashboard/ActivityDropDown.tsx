@@ -1,18 +1,19 @@
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/16/solid';
 import { useEffect, useState } from 'react';
 
-interface ActivityType {
+export interface ActivityType {
   id: number;
   title: string;
-  category: string;
+  category?: string;
 }
 interface ActivityDropDownProps {
   items: ActivityType[];
   onItemSelected: (item: ActivityType) => void;
+  labelText?: string;
 }
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
-function ActivityDropDown({ items, onItemSelected }: ActivityDropDownProps) {
+function ActivityDropDown({ items, onItemSelected, labelText }: ActivityDropDownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
@@ -36,7 +37,7 @@ function ActivityDropDown({ items, onItemSelected }: ActivityDropDownProps) {
 
   return (
     <div className='flex flex-col relative'>
-      <label className='absolute top-[-0.65rem] pl-[0.5rem] pr-[0.5rem] left-[1rem] bg-[white] text-[black] z-10'>체험명</label>
+      {labelText && <label className='absolute top-[-0.65rem] pl-[0.5rem] pr-[0.5rem] left-[1rem] bg-[white] text-[black] z-10'>{labelText}</label>}
       <button
         type='button'
         className='relative border border-black h-[5.6rem] text-left text-[black] text-[1.6rem] bg-[white] pl-[1.6rem] py-[1rem] pr-[2.5rem] rounded outline-none overflow-hidden text-ellipsis'
