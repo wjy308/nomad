@@ -8,7 +8,7 @@ import { ReservationCardType } from '@/utils/types/reservationInfo';
 import { queryKey } from '@/apis/queryKey';
 import PropTypes from 'prop-types';
 import ReservationCard from './ReservationCard';
-import ActivityDropDown, { ActivityType } from '@/pages/reservationdashboard/ActivityDropDown';
+import ActivityDropDown, { ActivityType } from '@/pages/reservation-dashboard/ActivityDropDown';
 import IconX from 'public/icons/Icon_X_bold.svg';
 
 interface ReservationSchedule {
