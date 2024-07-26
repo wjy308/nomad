@@ -14,7 +14,7 @@ import { GetActivityDetail } from '@/utils/types';
 import { PATCHActivityReq } from '@/utils/types/myActivities';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { FocusEvent, KeyboardEvent, MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 // 문화 예술 | 식음료 | 스포츠 | 투어 | 관광 | 웰빙
@@ -117,8 +117,9 @@ export default function PostActivitiy() {
     }
   };
 
-  const onBlurSetData = (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>, dataName: DataName) => {
-    const value = dataName === 'price' ? Number(e.target.value) : e.target.value;
+  const onChangeSetData = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, dataName: DataName, maxLength: number) => {
+    const slicedValue = e.target.value.slice(0, maxLength);
+    const value = dataName === 'price' ? Number(slicedValue) : slicedValue;
     setPatchData((prev) => ({ ...prev, [dataName]: value }));
   };
 
@@ -235,7 +236,10 @@ export default function PostActivitiy() {
             </div>
             <div className='flex flex-col gap-y-[2.4rem]'>
               {/* ------제목------ */}
-              <Input placeholder='제목' type='text' id='title' onBlur={(e) => onBlurSetData(e, 'title')} defaultValue={initData.title} cssName={INPUT_STYLE} />
+              <div className='flex flex-col'>
+                <Input placeholder='제목' type='text' id='title' onChange={(e) => onChangeSetData(e, 'title', 25)} value={patchData.title} cssName={INPUT_STYLE} />
+                <span className='self-end text-[1.2rem]'>{patchData.title.length}/25</span>
+              </div>
               {/* ------카테고리------ */}
               <Dropdown
                 lists={categories}
@@ -250,7 +254,16 @@ export default function PostActivitiy() {
                 }}
               />
               {/* ------설명------ */}
-              <Textarea placeholder='설명' onBlur={(e) => onBlurSetData(e, 'description')} defaultValue={initData.description} />
+              <div className='flex flex-col'>
+                <Textarea
+                  placeholder='설명'
+                  onChange={(e) => {
+                    onChangeSetData(e, 'description', 800);
+                  }}
+                  value={patchData.description}
+                />
+                <span className='self-end text-[1.2rem]'>{patchData.description.length}/800</span>
+              </div>
               {/* ------가격------ */}
               <div className='flex flex-col gap-y-[1.6rem]'>
                 <label htmlFor='price' className={LABEL_STYLE}>
@@ -260,7 +273,7 @@ export default function PostActivitiy() {
                   placeholder='가격'
                   type='number'
                   id='price'
-                  onBlur={(e) => onBlurSetData(e, 'price')}
+                  onChange={(e) => onChangeSetData(e, 'price', 20)}
                   defaultValue={initData.price}
                   cssName={`${INPUT_STYLE} [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                   onKeyUp={numberOnly}
