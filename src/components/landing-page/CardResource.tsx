@@ -12,7 +12,7 @@ interface CardResourceProps {
 export default function CardResource({ activitiesData, banner }: CardResourceProps) {
   const router = useRouter();
   const handleClick = (id: number) => {
-    router.push(`/activityDetail/${id}`);
+    router.push(`/activity-detail/${id}`);
   };
 
   const [isHovered, setIsHovered] = useState(false);
