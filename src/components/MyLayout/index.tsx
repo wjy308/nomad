@@ -14,7 +14,7 @@ export default function MyLayout({ children }: Children) {
   };
 
   return (
-    <section className='pt-[7.2rem] pb-[15rem] px-[2rem] max-w-[124rem] mx-auto sm:flex gap-[2.4rem] items-start'>
+    <section className='pt-[2.4rem] md:pt-[7.2rem] pb-[15rem] px-[2rem] max-w-[124rem] mx-auto sm:flex gap-[2.4rem] items-start'>
       <div className='hidden sm:block'>
         <SideNavigation />
       </div>
