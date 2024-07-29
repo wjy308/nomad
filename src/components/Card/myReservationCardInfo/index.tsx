@@ -50,12 +50,12 @@ export default function MyReservationCardInfo({
     <>
       <div className='relative flex flex-col justify-center w-full'>
         <span className={`leading-[2.6rem] font-[700] sm:text-[1.6rem] text-[1.4rem] ${statusInfo.btnColor}`}>{statusInfo.name}</span>
-        <h3 className='sm:text-[2rem] text-[1.4rem] font-[700] sm:leading-[2.6rem] leading-[2.4rem] text-[#112211] lg:mt-[0.8rem]'>{activity.title}</h3>
-        <span className='sm:text-[1.8rem] text-[1.2rem] font-[400] sm:leading-[2.4rem] leading-[1.8rem] lg:pt-[1.2rem] md:pt-[0.5rem]'>
+        <h3 className='sm:text-[2rem] text-[1.4rem] dark:text-gray-10 font-[700] sm:leading-[2.6rem] leading-[2.4rem] text-[#112211] lg:mt-[0.8rem]'>{activity.title}</h3>
+        <span className='sm:text-[1.8rem] text-[1.2rem] dark:text-gray-10 font-[400] sm:leading-[2.4rem] leading-[1.8rem] lg:pt-[1.2rem] md:pt-[0.5rem]'>
           {date} · {startTime} - {endTime} · {headCount}명
         </span>
         <div className='flex justify-between items-center lg:mt-[1.6rem] md:mt-[1rem]'>
-          <span className='sm:text-[2.4rem] text-[1.6rem] text-[#1b1b1b] sm:leading-[2.864rem] leading-[2.6rem] font-[500]'>
+          <span className='sm:text-[2.4rem] text-[1.6rem] text-[#1b1b1b] dark:text-gray-10 sm:leading-[2.864rem] leading-[2.6rem] font-[500]'>
             {'\uFFE6'}
             {totalPrice.toLocaleString('ko-KR')}
           </span>
