@@ -12,6 +12,7 @@ import DropdownMenu from '@/components/DropdownMenu';
 import Avatar from '@/components/Avatar';
 import DarkModeButton from '@/components/DarkModeButton';
 import DarkModeStore from '@/context/themeContext';
+import Notifications from '@/components/Modal/ModalContents/notifications';
 // import Modal from '../Modals';
 
 /**
@@ -118,7 +119,6 @@ export default function Header(): JSX.Element | null {
                   setShowModal={isNotificationOpenToggle}
                 />
               )} */}
-              {isNotificationOpen && <div />}
               <div className='relative flex items-center gap-10'>
                 <div className='h-9 border-r border-gray-300 dark:border-gray-10' />
                 <div className='flex items-center gap-4'>
@@ -133,6 +133,11 @@ export default function Header(): JSX.Element | null {
           )}
         </div>
       </div>
+      {isNotificationOpen && (
+        <div className='absolute w-[36.8rem] p-[2rem] bg-green-light rounded-[0.8rem] h-[33.7rem] bottom-[-35rem] right-[10%] z-60'>
+          <Notifications />
+        </div>
+      )}
     </div>
   );
 }
