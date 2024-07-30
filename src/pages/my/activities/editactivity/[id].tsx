@@ -78,9 +78,9 @@ export default function PostActivitiy() {
     { id: -50000, category: '관광', title: '관광' },
     { id: -60000, category: '웰빙', title: '웰빙' },
   ];
-  const DATE_LABEL_STYLE = 'text-[2rem] leading-[2.6rem] text-gray-500 max-md:text-[1.6rem]';
+  const DATE_LABEL_STYLE = 'text-[2rem] leading-[2.6rem] text-gray-500 dark:text-gray-50 max-md:text-[1.6rem]';
   const DATE_INPUT_LABEL_STYLE = 'flex flex-col gap-y-[1rem] max-md:gap-y-[0.8rem]';
-  const LABEL_STYLE = 'text-black text-[2.4rem] font-bold leading-[2.6rem] max-md:text-[2rem]';
+  const LABEL_STYLE = 'text-black dark:text-white text-[2.4rem] font-bold leading-[2.6rem] max-md:text-[2rem]';
   const INPUT_STYLE = 'h-[5.6rem] leading-[2.6rem] py-[0.8rem] px-[1.6rem]';
   const TIME_INPUT_STYLE = 'h-[5.6rem] w-[14rem] max-lg:w-[10.4rem] max-md:w-[7.9rem] max-md:h-[4.4rem] max-md:text-[1.4rem]';
 
@@ -228,11 +228,11 @@ export default function PostActivitiy() {
 
   return (
     <MyLayout>
-      <main className='bg-gray-10 mb-[27rem] max-lg:mb-[40rem] max-md:mb-[13.6rem]'>
+      <main className='bg-gray-10 dark:bg-nomad-black dark:text-gray-10 mb-[27rem] max-lg:mb-[40rem] max-md:mb-[13.6rem]'>
         {isLoaded ? (
           <form onSubmit={() => false} className='relative text-[1.6rem] max-md:text-[1.4rem]'>
             <div className='flex justify-between mb-[2.4rem] '>
-              <h2 className='text-[3.2rem] text-[#000] leading-[3.8rem] font-bold'>내 체험 등록</h2>
+              <h2 className='text-[3.2rem] text-[#000] dark:text-[#fff] leading-[3.8rem] font-bold'>내 체험 등록</h2>
             </div>
             <div className='flex flex-col gap-y-[2.4rem]'>
               {/* ------제목------ */}
