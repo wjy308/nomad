@@ -13,12 +13,13 @@ interface FormData {
 interface Props {
   id: number;
   onClickCloseModal: () => void;
+  currentFilterOption: string | undefined;
+  refreshReservationList: (filterOption: string | undefined) => Promise<void>;
 }
 
 // 1.리뷰 리스트 리액트쿼리 마이그레이션
-// 2.후기 작성하면 더이상 못하게 막아야 됨
 
-export default function ReviewForm({ id, onClickCloseModal }: Props) {
+export default function ReviewForm({ id, onClickCloseModal, currentFilterOption, refreshReservationList }: Props) {
   // const queryClient = useQueryClient();
   const { control, handleSubmit, setValue, register } = useForm<FormData>({
     defaultValues: { rating: 0, content: '' },
@@ -28,6 +29,7 @@ export default function ReviewForm({ id, onClickCloseModal }: Props) {
     mutationFn: (data: FormData) => postMyReview(id, data),
     onSuccess: () => {
       onClickCloseModal();
+      refreshReservationList(currentFilterOption);
       // queryClient.invalidateQueries({ queryKey: ['MyReservations'] });
     },
   });

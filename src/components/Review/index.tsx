@@ -1,9 +1,17 @@
 import useModalScrollBlock from '@/hooks/useModalScrollBlock';
 import Image from 'next/image';
 import { ICON } from '@/constant/importImages';
+import { IReservationCardInfo } from '@/types/ReservationInfo';
 import ReviewForm from './ReviewForm';
 
-function Review({ closeModal, reservationInfo }: any) {
+interface IReviewProps {
+  closeModal: () => void;
+  reservationInfo: IReservationCardInfo;
+  currentFilterOption: string | undefined;
+  refreshReservationList: (filterOption: string | undefined) => Promise<void>;
+}
+
+function Review({ closeModal, reservationInfo, currentFilterOption, refreshReservationList }: IReviewProps) {
   useModalScrollBlock();
 
   return (
@@ -31,7 +39,7 @@ function Review({ closeModal, reservationInfo }: any) {
               </span>
             </div>
           </div>
-          <ReviewForm id={reservationInfo.id} onClickCloseModal={closeModal} />
+          <ReviewForm id={reservationInfo.id} onClickCloseModal={closeModal} currentFilterOption={currentFilterOption} refreshReservationList={refreshReservationList} />
         </div>
       </div>
     </div>

@@ -60,10 +60,11 @@ export default function MyReservationCardInfo({
             {totalPrice.toLocaleString('ko-KR')}
           </span>
           {statusInfo.name === '예약 신청' && <Button text='예약 취소' color='white' cssName={btnCss} onClick={handleOpenCancelConfirm} />}
-          {statusInfo.name === '체험 완료' && <Button text='후기 작성' color='black' cssName={btnCss} onClick={handleOpenReview} />}
+          {statusInfo.name === '체험 완료' &&
+            (data.reviewSubmitted ? <Button text='후기 작성 완료' color='black' cssName={btnCss} disabled /> : <Button text='후기 작성' color='black' cssName={btnCss} onClick={handleOpenReview} />)}
         </div>
       </div>
-      {reviewModalState && <Review closeModal={handleCloseReview} reservationInfo={data} />}
+      {reviewModalState && <Review closeModal={handleCloseReview} reservationInfo={data} currentFilterOption={currentFilterOption} refreshReservationList={refreshReservationList} />}
     </>
   );
 }
