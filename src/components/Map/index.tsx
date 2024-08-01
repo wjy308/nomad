@@ -35,16 +35,10 @@ function Map({ address }: MapProps) {
           if (status === kakao.maps.services.Status.OK) {
             const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-            const markerImageSrc = '/images/test_map_marker.png';
-            const markerImageSize = new kakao.maps.Size(65, 90);
-            const markerImageOptions = { offset: new kakao.maps.Point(27, 69) };
-            const markerImage = new kakao.maps.MarkerImage(markerImageSrc, markerImageSize, markerImageOptions);
-
             const markerPosition = coords;
             const marker = new kakao.maps.Marker({
               map,
               position: markerPosition,
-              image: markerImage,
             });
             marker.setMap(map);
 
@@ -68,15 +62,8 @@ function Map({ address }: MapProps) {
   }, [address]);
 
   return (
-    // 반응형 수정중
     <div className='relative w-full'>
-      <div
-        id='map'
-        className='relative w-full h-full rounded-[1.6rem]
-        lg:w-full lg:h-[45rem]  
-        md:w-full md:h-[27.6rem] 
-      '
-      />
+      <div id='map' className='w-full h-[45rem] rounded-2xl xl:h-[45rem] lg:h-[27.6rem] md:h-[45rem]' />
       {loading && <p className='absolute text-[2rem]'>카카오 지도 불러오는중...</p>}
     </div>
   );
