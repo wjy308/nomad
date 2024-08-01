@@ -16,7 +16,7 @@ function Review({ closeModal, reservationInfo, currentFilterOption, refreshReser
 
   return (
     <div className='fixed top-0 right-0 bottom-0 left-0 bg-var-modal-bg z-[999]'>
-      <div className='pt-[2.8rem] px-[2.4rem] rounded-[0.8rem] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#FFFFFF] w-[48rem] max-h-[90vh] overflow-auto dark:border dark:border-gray-10 dark:bg-nomad-black'>
+      <div className='pt-[2.8rem] px-[2.4rem] md:rounded-[0.8rem] fixed md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 bg-[#FFFFFF] md:w-[48rem] md:max-h-[90vh] overflow-auto dark:border dark:border-gray-10 dark:bg-black w-full h-full md:h-auto'>
         <div className='flex justify-between items-center'>
           <h2 className='text-[2.8rem] text-black font-[700] leading-[2.6rem] dark:text-gray-10'>후기 작성</h2>
           <button type='button' onClick={closeModal}>
